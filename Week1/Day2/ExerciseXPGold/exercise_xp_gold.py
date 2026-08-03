@@ -2,7 +2,7 @@
 # Instructions
 # Write code that concatenates two lists together without using the + sign.
 
-"""list1 = ["Apples", "Oranges", "Bananas"]
+list1 = ["Apples", "Oranges", "Bananas"]
 list2 = ["Tomatoes", "Peppers", "Cucumbers"]
 concatenated_list = []
 
@@ -19,7 +19,7 @@ print(concatenated_list)"""
 
 """for num in range(1500, 2501):
     if num % 5 == 0 and num % 7 == 0:
-        print(num)"""
+        print(num)
 
 # Exercise 3: Check the index
 # Instructions
@@ -29,11 +29,11 @@ print(concatenated_list)"""
 #
 # Example: if input is 'Cortana' we should be printing the index 1
 
-"""names = ['Samus', 'Cortana', 'V', 'Link', 'Mario', 'Cortana', 'Samus']
+names = ['Samus', 'Cortana', 'V', 'Link', 'Mario', 'Cortana', 'Samus']
 user_name = input("Please enter your name: ")
 
 if user_name in names:
-    print(names.index(user_name))"""
+    print(names.index(user_name))
 
 # Exercise 4: Greatest Number
 # Instructions
@@ -46,27 +46,27 @@ if user_name in names:
 #
 # The greatest number is: 87
 
-"""num_list = []
+num_list = []
 for i in range(3):
     user_input = int(input("Enter your number: "))
     num_list.append(user_input)
 
 num_list.sort()
-print(f"The greatest number is: {num_list[-1]}")"""
+print(f"The greatest number is: {num_list[-1]}")
 
 # Exercise 5: The Alphabet
 # Instructions
 # Create a string of all the letters in the alphabet
 # Loop over each letter and print a message that contains the letter and whether its a vowel or a consonant.
 
-"""alphabet_list = [chr(char) for char in range(97, 122)]
+alphabet_list = [chr(char) for char in range(97, 122)]
 alphabet_string = ''.join(alphabet_list)
 
 for char in alphabet_string:
     if char in ['a', 'e', 'i', 'o', 'u']:
         print(f"{char} is a vowel")
     else:
-        print(f"{char} is a consonant")"""
+        print(f"{char} is a consonant")
 
 # Exercise 6: Words and letters
 # Instructions
@@ -75,21 +75,21 @@ for char in alphabet_string:
 # Loop through the words list and print the index of the first appearence of the letter variable in each word of the list.
 # If the letter doesn’t exist in one of the words, print a friendly message with the word and the letter.
 
-"""words = []
+words = []
 for i in range(7):
     words.append(input("Enter a word: ").lower())
 
 letter = input("Enter a single character: ").lower()
 
 for word in words:
-    print(f"{word.find(letter) if letter in word else "The word '" + word + "' doesn't contain the letter " + letter}")"""
+    print(f"{word.find(letter) if letter in word else "The word '" + word + "' doesn't contain the letter " + letter}")
 
 # Exercise 7: Min, Max, Sum
 # Instructions
 # Create a list of numbers from one to one million and then use min() and max() to make sure your list actually starts at one and ends at one million. Use the sum() function to see how quickly Python can add a million numbers.
 
-"""one_to_million_list = [i for i in range(1, 1000001)]
-print(min(one_to_million_list), max(one_to_million_list), sum(one_to_million_list))"""
+one_to_million_list = [i for i in range(1, 1000001)]
+print(min(one_to_million_list), max(one_to_million_list), sum(one_to_million_list))
 
 # Exercise 8 : List and Tuple
 # Instructions
@@ -102,13 +102,13 @@ print(min(one_to_million_list), max(one_to_million_list), sum(one_to_million_lis
 # ['34', '67', '55', '33', '12', '98']
 # ('34', '67', '55', '33', '12', '98')
 
-"""user_input = input("Enter a sequence of comma-separated numbers: ")
+user_input = input("Enter a sequence of comma-separated numbers: ")
 numbers = [num.strip() for num in user_input.split(',')]
 numbers_list = list(numbers)
 numbers_tuple = tuple(numbers)
 
 print(numbers_list)
-print(numbers_tuple)"""
+print(numbers_tuple)
 
 # Exercise 9 : Random number
 # Instructions
