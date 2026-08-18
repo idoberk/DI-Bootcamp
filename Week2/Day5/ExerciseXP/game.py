@@ -59,7 +59,7 @@ class Game:
 
     def get_user_item(self):
         """
-        Method to validate user input and return it if valid.
+        Method to validate user input and return the input if valid.
         """
         while True:
             choice = input("Choose rock, paper, scissors: ").strip().lower()
