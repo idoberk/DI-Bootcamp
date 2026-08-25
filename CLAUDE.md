@@ -23,22 +23,36 @@ This is a **learning exercise repository**, not production code. Review it as a 
 All coach state lives under `.progress/` at the repo root. Never create these files anywhere else, and never touch files outside `.progress/` and `PROGRESS.md`.
 
 ### `.progress/state.json`
+
 Tracks what's already been reviewed.
+
 ```json
 {
-  "last_reviewed_sha": "a1b2c3d",
-  "last_run_at": "2026-08-18T07:02:00+03:00",
-  "run_count": 12
+	"last_reviewed_sha": "a1b2c3d",
+	"last_run_at": "2026-08-18T07:02:00+03:00",
+	"run_count": 12
 }
 ```
 
 ### `.progress/stats.jsonl`
+
 Append-only. One JSON object per line, one line per run. Never edit or delete an existing line — only append a new one.
+
 ```json
-{"date":"2026-08-18","commits":4,"files_changed":6,"lines_added":142,"lines_removed":31,"topics":["dictionaries","error handling"],"streak_days":5,"recommendation_count":2}
+{
+	"date": "2026-08-18",
+	"commits": 4,
+	"files_changed": 6,
+	"lines_added": 142,
+	"lines_removed": 31,
+	"topics": ["dictionaries", "error handling"],
+	"streak_days": 5,
+	"recommendation_count": 2
+}
 ```
 
 ### `PROGRESS.md`
+
 Human-readable, at the repo root. One file that grows for the whole course. New entries are **prepended** at the top (newest first), so the student sees today's entry without scrolling.
 
 ## Workflow
@@ -51,11 +65,12 @@ Run this exact sequence every time, in order. Do not skip or reorder steps.
 4. Write a new dated entry at the **top** of `PROGRESS.md`, following the template below exactly.
 5. Append exactly one line to `.progress/stats.jsonl` for this run.
 6. Update `.progress/state.json`: set `last_reviewed_sha` to the new `HEAD` (only counting committed work — see Edge Cases), update `last_run_at`, increment `run_count`.
-7. Commit `PROGRESS.md`, `state.json`, and `stats.jsonl` together in a single commit. Never push.
+7. Commit `PROGRESS.md`, `state.json`, and `stats.jsonl` together in the isolated worktree, then fast-forward / merge that commit into main. Never push.
 
 ### Bootstrap (first run ever)
 
 If `.progress/state.json` doesn't exist yet:
+
 - Create `.progress/` with `state.json` using the **current `HEAD`** as `last_reviewed_sha` — do not generate a diff-based review or recommendations on this run.
 - Create an empty `.progress/stats.jsonl`.
 - Create `PROGRESS.md` with a short header explaining what the file is.
@@ -74,6 +89,7 @@ Every daily entry in `PROGRESS.md` must follow this template exactly, so entries
 **What I saw:** [2-4 sentences, specific to the actual diff]
 
 **Recommendations:**
+
 - [specific, tied to an observed file/line/pattern]
 - [specific]
 
@@ -92,14 +108,14 @@ Every daily entry in `PROGRESS.md` must follow this template exactly, so entries
 
 Handle these explicitly rather than improvising:
 
-| Case | What to do |
-|---|---|
-| No commits since last check | Still write a short `PROGRESS.md` entry noting the gap. Do **not** append a `stats.jsonl` entry with zero commits — that would pad the streak. |
-| Uncommitted local changes only | Mention them in the entry as "in progress." Don't count them as reviewed work, and don't advance `last_reviewed_sha` past them. |
-| Missed run (e.g. laptop was asleep) catching up late | If `last_run_at` was more than a day ago, say explicitly that this is a delayed/catch-up review — don't present it as if it happened on schedule. |
-| Same-day duplicate fire (e.g. a catch-up run right after a normal one) | Check the date on `last_run_at` before appending. If a run already happened today for materially the same diff, don't create a second `stats.jsonl` entry. |
-| Student rewrote history (force-push, rebase) | If `last_reviewed_sha` no longer exists in the repo's history, fall back to the oldest common ancestor and flag the discrepancy in the entry rather than failing silently. |
-| First run ever | Bootstrap only (see above) — no diff-based review, no recommendations. |
+| Case                                                                   | What to do                                                                                                                                                                 |
+| ---------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| No commits since last check                                            | Still write a short `PROGRESS.md` entry noting the gap. Do **not** append a `stats.jsonl` entry with zero commits — that would pad the streak.                             |
+| Uncommitted local changes only                                         | Mention them in the entry as "in progress." Don't count them as reviewed work, and don't advance `last_reviewed_sha` past them.                                            |
+| Missed run (e.g. laptop was asleep) catching up late                   | If `last_run_at` was more than a day ago, say explicitly that this is a delayed/catch-up review — don't present it as if it happened on schedule.                          |
+| Same-day duplicate fire (e.g. a catch-up run right after a normal one) | Check the date on `last_run_at` before appending. If a run already happened today for materially the same diff, don't create a second `stats.jsonl` entry.                 |
+| Student rewrote history (force-push, rebase)                           | If `last_reviewed_sha` no longer exists in the repo's history, fall back to the oldest common ancestor and flag the discrepancy in the entry rather than failing silently. |
+| First run ever                                                         | Bootstrap only (see above) — no diff-based review, no recommendations.                                                                                                     |
 
 ## Non-Functional Rules
 
