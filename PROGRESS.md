@@ -2,6 +2,33 @@
 
 This is the running, human-readable log kept by the Student Progress Coach. Each daily review is prepended as a new entry at the top, so the most recent entry is always first. See `CLAUDE.md` for the full coaching contract and entry format.
 
+## 2026-08-25 (reconciled)
+
+**Note:** this entry and the one below it were reconstructed on 2026-08-25 after discovering that scheduled runs from 2026-08-19 through 2026-08-25 had been landing in isolated worktrees (worktree isolation was on) and never merging back to `main`, so they never reached this file. Worktree isolation has since been turned off. This entry covers `2d66e64`, committed 2026-08-24.
+
+**Since previous entry:** 1 commit, 3 files — data preprocessing, feature engineering, outlier handling, scikit-learn
+
+**What I saw:** `2d66e64` (Week3/Day2) is a real step up from Day1's mostly-descriptive work: a full Titanic preprocessing pipeline in `Week3/Day2/ExerciseXP/exercise_xp.ipynb` that chains duplicate removal, `SimpleImputer(strategy='median')` for `Age`, mode-fill for `Embarked`, feature engineering (`Family Size` from `SibSp`+`Parch`, `Title` extracted from `Name` via regex with rare-title collapsing), IQR-based outlier detection with a reusable `iqr_bounds()` helper, three outlier treatments (capping, log transform, row removal) compared side by side, and `StandardScaler` vs `MinMaxScaler` chosen deliberately per feature's skew (cell 40 reasons about `Age` being symmetric vs `Fare` staying right-skewed after capping). That's a coherent, justified pipeline rather than isolated snippets.
+
+**Recommendations:**
+- `Week3/Day2/ExerciseXP/exercise_xp.ipynb` never re-checks `titanic_data.isna().sum()` after the Age/Cabin/Embarked fixes in Exercise 2 — worth adding a quick verification cell there to confirm no missing values remain before moving on to feature engineering, since that's a good habit for any future pipeline.
+
+**Streak:** 2 days (2026-08-23, 2026-08-24)
+
+## 2026-08-24 (delayed/catch-up review, reconciled)
+
+**Note:** last review before this one ran 2026-08-18. This catches up on everything committed since, which turned out to be a single commit, `ba88f6e`, from 2026-08-23.
+
+**Since yesterday:** 1 commit, 8 files — pandas I/O, Kaggle datasets, qualitative/quantitative classification
+
+**What I saw:** `Week3/Day1/ExerciseXP/exercise_xp.ipynb` covers a good range of new pandas I/O: `pd.read_csv` on three real-world datasets, `kagglehub.dataset_load` to pull the Iris dataset straight from Kaggle (cell 10), `df.to_excel` / `df.to_json` for export (cell 20), and `pd.read_json` for import (cell 22) — none of these I/O paths showed up in earlier work. There's a conceptual mix-up running through the whole notebook, though: continuous numeric columns are consistently labeled "Qualitative" instead of Quantitative. Cell 3 calls "AVG hours per day sleeping" qualitative "because it's a continuous value," and the same mistake repeats for `Age`/`Debt`/`YearsEmployed` in cell 7 and for all four Iris measurements (`sepal_length`, `sepal_width`, `petal_length`, `petal_width`) in cell 11. A continuous, arithmetic-friendly value is the textbook definition of quantitative, so the label and the reasoning point in opposite directions every time.
+
+**Recommendations:**
+- Revisit the qualitative-vs-quantitative labels in cells 3, 5, 7, and 11 — anywhere the write-up says "continuous value" or "arithmetic operations are useful," the column should be marked Quantitative, not Qualitative. This comes up again in Exercise 6/7's structured-vs-unstructured discussion, so worth a pass now.
+- Exercise 7 (cell 17) trails off mid-sentence on the audio-recordings example ("keywords (type of complaints, product") — worth finishing that thought since the blog-post example right above it is a solid, complete answer to model it on.
+
+**Streak:** 1 day (previous streak broke — no commits between 2026-08-18 and 2026-08-23)
+
 ## 2026-08-18
 
 **Since yesterday:** 2 commits, 3 files — modules, documentation
