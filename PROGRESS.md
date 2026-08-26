@@ -2,6 +2,17 @@
 
 This is the running, human-readable log kept by the Student Progress Coach. Each daily review is prepended as a new entry at the top, so the most recent entry is always first. See `CLAUDE.md` for the full coaching contract and entry format.
 
+## 2026-08-26
+
+**Since yesterday:** 0 exercise commits — 2 non-exercise commits touched the repo (`c92d9f0`, the coach's own reconciliation commit, and `95ffa21`, a `CLAUDE.md` update to the coaching instructions)
+
+**What I saw:** No exercise files changed since the 2026-08-25 review. `95ffa21` reworked `CLAUDE.md` itself (29 insertions/13 deletions) rather than any code under `Week3/` or elsewhere, so there's nothing to review from a coding standpoint today — just noting the gap honestly rather than padding this entry with unrelated praise.
+
+**Recommendations:**
+- Get back to `Week3/Day2/ExerciseXP/exercise_xp.ipynb`'s follow-up from the last real review (the missing-value re-check after imputation) or move on to the next day's exercise — the pipeline work there was strong and worth building on rather than letting it sit.
+
+**Streak:** broken — no exercise commits between 2026-08-24 and 2026-08-26
+
 ## 2026-08-25 (reconciled)
 
 **Note:** this entry and the one below it were reconstructed on 2026-08-25 after discovering that scheduled runs from 2026-08-19 through 2026-08-25 had been landing in isolated worktrees (worktree isolation was on) and never merging back to `main`, so they never reached this file. Worktree isolation has since been turned off. This entry covers `2d66e64`, committed 2026-08-24.
