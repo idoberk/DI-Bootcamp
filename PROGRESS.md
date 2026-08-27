@@ -2,6 +2,18 @@
 
 This is the running, human-readable log kept by the Student Progress Coach. Each daily review is prepended as a new entry at the top, so the most recent entry is always first. See `CLAUDE.md` for the full coaching contract and entry format.
 
+## 2026-08-27
+
+**Since yesterday:** 2 commits, 4 files — data visualization (Matplotlib, Seaborn, Plotly, ipywidgets)
+
+**What I saw:** `Week3/Day4/DailyChallenge/daily_challenge.ipynb` is a genuine step up in scope: a full Superstore sales analysis that chains cleaning (`drop_duplicates`, `Postal Code` fillna), feature engineering (`Profit Margin`, `Order Year`/`Month` via `.dt` accessors), an interactive Matplotlib time-series plot driven by an `ipywidgets` `Dropdown`, a `Seaborn` `barplot` with value annotations for top-10 profitable products, and a `scatterplot` + `regplot` combo to visualize the discount/profit relationship by category. `ipywidgets` and interactivity hadn't shown up in this repo before, and this notebook also tackles all three optional advanced challenges rather than stopping at the required scope: a 2x2 multi-chart dashboard (cell 22), outlier annotation labeling the top/bottom 3 transactions by profit (cell 24), and a Plotly rebuild of the discount/profit scatter with a written Matplotlib-vs-Plotly comparison (cell 26). `Week3/Day4/ExerciseXP/exercise_xp.ipynb` covers the fundamentals underneath that — line/bar/histogram/scatter plots — and cell 14's `sns.barplot` maps `"Do you have Anxiety?"` from `Yes`/`No` strings to `1`/`0` on the fly to get a proportion-by-gender chart, a clean way to turn a categorical column into something a bar chart can aggregate.
+
+**Recommendations:**
+- The Plotly comparison in cell 26 of the daily challenge notebook is a good start, but the "Plotly Advantages" list gets cut off mid-print — worth finishing that comparison with at least one concrete disadvantage of Plotly too (e.g. file size, offline rendering) to make it a genuinely two-sided evaluation like the brief asks for.
+- `exercise_xp.ipynb` exercise 6 (cell 16) maps `"Do you have Panic attack?"` to 0/1 but never checks for typos or inconsistent casing in that column the way the daily challenge notebook checks `isnull().sum()` up front — a quick `df["Do you have Panic attack?"].unique()` before mapping would catch that class of bug before it silently mismaps values.
+
+**Streak:** 1 day (previous streak broke — no exercise commits between 2026-08-24 and 2026-08-26)
+
 ## 2026-08-26
 
 **Since yesterday:** 0 exercise commits — 2 non-exercise commits touched the repo (`c92d9f0`, the coach's own reconciliation commit, and `95ffa21`, a `CLAUDE.md` update to the coaching instructions)
