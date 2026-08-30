@@ -2,6 +2,20 @@
 
 This is the running, human-readable log kept by the Student Progress Coach. Each daily review is prepended as a new entry at the top, so the most recent entry is always first. See `CLAUDE.md` for the full coaching contract and entry format.
 
+## 2026-08-30 (delayed/catch-up review)
+
+**Note:** this is a delayed review — the last run was 2026-08-27, so this entry covers three days of gap plus today's single commit, not a normal next-day check-in.
+
+**Since last review:** 1 commit, 3 files — data visualization, geographic mapping (Plotly choropleth), Pareto/80-20 analysis
+
+**What I saw:** `707cfa2` adds two week-3 mini-projects built on the US Superstore dataset. `Week3/Day5/DailyChallenge/mini_project_interactive_data_vis.ipynb` goes past the two prior notebooks' interactivity: `plot_sales_trend(category="All")` is a proper parameterized function (not just an inline `interact()` lambda) wired to a `Dropdown`, and a new technique shows up — a `plotly.express.choropleth` state-by-state sales map using the `us` package to convert full state names to postal abbreviations (`us.states.lookup(name).abbr`), including a manual fix for `"District of Columbia"` which the `us` lookup doesn't resolve to `"DC"` on its own. The notebook closes with a written "Matplotlib vs. Seaborn" comparison and an f-string-driven executive summary that computes top state, top product, and high-discount loss rate. `Week3/Day5/ExerciseXP/mini_project_marketing_strategy.ipynb` is the bigger piece of growth: it implements Pareto (80/20) analysis from scratch, twice — once for customer profit (cell with `pareto_df["Cumulative Profit %"]`) and again for customer sales (`sales_pareto_df`) — each computing a cumulative-percentage curve and counting how many customers account for 80% of the total, then plotting it against the 80/20 reference lines with `axhline`/`axvline`. That's the first time a cumulative-distribution technique like this has shown up in the repo.
+
+**Recommendations:**
+- The two Pareto blocks in `mini_project_marketing_strategy.ipynb` (profit vs. sales) are near-identical except for the column name — this is a good candidate to factor into a `pareto_analysis(df, group_col, value_col)` helper the way `iqr_bounds()` was factored out back in the Day2 outlier-handling notebook; it would also make it easy to add a third Pareto cut (e.g. by product) later without copy-pasting again.
+- Several code comments in `mini_project_marketing_strategy.ipynb` pose the analysis question as a genuine open question in-line (e.g. `# Finding who is an outstanding customer in New York (What does outstanding means in this context?...)`) but the notebook picks profit without stating why in a markdown cell — worth adding a one-line rationale next to that decision so the choice reads as deliberate rather than arbitrary when revisited later.
+
+**Streak:** 1 day (previous streak broke — no exercise commits between 2026-08-27 and 2026-08-29)
+
 ## 2026-08-27
 
 **Since yesterday:** 2 commits, 4 files — data visualization (Matplotlib, Seaborn, Plotly, ipywidgets)
