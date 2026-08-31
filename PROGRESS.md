@@ -2,6 +2,20 @@
 
 This is the running, human-readable log kept by the Student Progress Coach. Each daily review is prepended as a new entry at the top, so the most recent entry is always first. See `CLAUDE.md` for the full coaching contract and entry format.
 
+## 2026-08-31
+
+**Note:** the single commit reviewed here (`15d15f8`) was made on 2026-08-30, shortly after yesterday's review already ran — so this is the same coding session as yesterday's entry, just caught on today's run rather than a fresh day of work.
+
+**Since yesterday:** 1 commit, 2 files — NumPy fundamentals, NumPy/Pandas/Matplotlib integration
+
+**What I saw:** `Week4/Day1/ExerciseXP/exercise_xp.ipynb` runs through 10 focused NumPy basics — `np.arange`, dtype conversion via `.astype(int)`, `reshape`, `np.eye`, slicing/reversal, and boolean-mask filtering (`ex_10_arr = ex_1_arr[ex_1_arr % 2 == 1]` for odd numbers). `Week4/Day1/DailyChallenge/daily_challenge.ipynb` is the more interesting piece: it builds a synthetic 10-city x 12-month temperature dataset and does real analysis on it — `annual_avg = temp_df.mean(axis=1)` with `idxmax()`/`idxmin()` to find hottest/coldest cities, a bar chart that color-codes the hottest (red) and coldest (blue) bars via a list comprehension keyed off city name, and a `plt.imshow` heatmap of the full city x month grid. The closing "Findings" markdown cell shows genuine reflection rather than boilerplate — it correctly reasons that the line plot looks jagged and non-seasonal specifically *because* the data was generated with `np.random.uniform` independently per month, not because of a plotting mistake.
+
+**Recommendations:**
+- `daily_challenge.ipynb` uses the newer `rng = np.random.default_rng(42)` Generator API, but `exercise_xp.ipynb` Exercise 4 still calls the legacy `np.random.rand(4, 5)` — worth standardizing on `default_rng()` everywhere now that it's been used successfully once, since it's more reproducible and is the NumPy-recommended approach going forward.
+- The "Findings" cell in `daily_challenge.ipynb` still has unfilled placeholders — `_(value printed above, e.g. Cairo)_` for both hottest and coldest city — even though the cell right above it already computed and printed the real answers (New York / Nairobi). Worth going back and swapping those placeholders for the actual values so the write-up reads as finished.
+
+**Streak:** 1 day (same calendar day as the last review, not a new day of activity)
+
 ## 2026-08-30 (delayed/catch-up review)
 
 **Note:** this is a delayed review — the last run was 2026-08-27, so this entry covers three days of gap plus today's single commit, not a normal next-day check-in.
