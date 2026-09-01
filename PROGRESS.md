@@ -2,6 +2,17 @@
 
 This is the running, human-readable log kept by the Student Progress Coach. Each daily review is prepended as a new entry at the top, so the most recent entry is always first. See `CLAUDE.md` for the full coaching contract and entry format.
 
+## 2026-09-01
+
+**Since yesterday:** No new exercise commits — the only commit in the repo since the last review (`2b0da17`) is yesterday's own progress-coach entry, not student work. No uncommitted changes in the working tree either.
+
+**What I saw:** Nothing to report today — the repo is exactly where it was left after the 2026-08-31 review (still at `15d15f8`, the Week 4 Day 1 NumPy/Pandas/Matplotlib work). No new notebooks, no in-progress files.
+
+**Recommendations:**
+- Pick back up on Week 4 — the two open items flagged in the 2026-08-31 entry (standardizing on `np.random.default_rng()` in `exercise_xp.ipynb`, and filling in the placeholder city names in `daily_challenge.ipynb`'s Findings cell) are both still outstanding and quick to close out.
+
+**Streak:** broken — no exercise commits today
+
 ## 2026-08-31
 
 **Note:** the single commit reviewed here (`15d15f8`) was made on 2026-08-30, shortly after yesterday's review already ran — so this is the same coding session as yesterday's entry, just caught on today's run rather than a fresh day of work.
