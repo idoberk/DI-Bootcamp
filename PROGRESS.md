@@ -2,6 +2,18 @@
 
 This is the running, human-readable log kept by the Student Progress Coach. Each daily review is prepended as a new entry at the top, so the most recent entry is always first. See `CLAUDE.md` for the full coaching contract and entry format.
 
+## 2026-09-02
+
+**Since yesterday:** 3 commits, 6 files — inferential statistics (t-test, ANOVA, correlation), aviation-crash EDA, PCA/dimensionality reduction
+
+**What I saw:** Strong session across three notebooks. `Week3/Day3/ExerciseXP/exercise_xp.ipynb` is the first appearance of `scipy.stats` in the repo — a two-sample t-test, one-way ANOVA on fertilizer groups, and a from-scratch linear regression writeup, each followed by a markdown cell that actually interprets the p-value rather than just reporting it (e.g. "P-Value of 0.0000275 is far below the standard significance level"). `Week3/Day3/DailyChallenge/daily_challenge.ipynb` analyzes the 1908-2023 airplane crash dataset and is a clear step up from earlier "Findings" sections that left placeholders unfilled (flagged in the 2026-08-31 review): it runs a genuine Mann-Whitney U test comparing 1990s vs. 2010s fatality distributions (p=0.68, correctly concluded "not meaningfully less severe"), quantifies right-skew with mean vs. median (22.4 vs. 11.0), and closes with an honest "Caveats" section calling out that `Region` is derived from a messy free-text field. `Week3/Day2/DailyChallenge/daily_challenge.ipynb` (job-salary dataset) is the most technically ambitious: it one-hot/frequency-encodes categoricals, standardizes, fits full PCA to find 9-of-12 components are needed for 90% variance, then explicitly reasons about *why* — one-hot columns are close to orthogonal so there's little redundancy to compress — and separately flags the Executive salary group (n=13, mean $76k vs. median $46k) as too small and skewed to trust. `Week3/Day2/ExerciseXP/exercise_xp.ipynb` only picked up formatting churn this round (single→double quotes, long lines wrapped, execution counts reset to null) — looks like an autoformatter (Black-style) ran over it, no logic changes.
+
+**Recommendations:**
+- The PC1-loading interpretation in `Week3/Day2/DailyChallenge/daily_challenge.ipynb` (noting `experience_level_Senior` at ~0.62 vs. a ~0.29 baseline) is exactly the kind of "why" reasoning that was missing from earlier PCA/stats work — worth carrying that same loadings-inspection habit into Exercise 5/6 of `Week3/Day3/ExerciseXP/exercise_xp.ipynb`, where the ANOVA and t-test conclusions are correct but stop at the p-value without checking effect size (e.g. Cohen's d or eta-squared).
+- Since an autoformatter now appears to be running on save (the Day2 ExerciseXP diff is 100% quote-style/line-wrap changes), consider adding a `pyproject.toml`/`.jupytext.toml` config or just applying it consistently across all notebooks in one pass, so future diffs aren't mixed formatting-noise + content changes — right now it's easy to miss the real change buried in reformatted lines.
+
+**Streak:** 1 day (yesterday, 2026-09-01, had no exercise commits, so this restarts the count)
+
 ## 2026-09-01
 
 **Since yesterday:** No new exercise commits — the only commit in the repo since the last review (`2b0da17`) is yesterday's own progress-coach entry, not student work. No uncommitted changes in the working tree either.
