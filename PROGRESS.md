@@ -2,6 +2,20 @@
 
 This is the running, human-readable log kept by the Student Progress Coach. Each daily review is prepended as a new entry at the top, so the most recent entry is always first. See `CLAUDE.md` for the full coaching contract and entry format.
 
+## 2026-09-03
+
+**Note:** the commit reviewed here (`e969cc2`, merged via `1596e14`) was made 2026-09-02 at 17:26, a few hours after that day's review already ran — so this is a continuation of yesterday's coding session, not a fresh day of work.
+
+**Since yesterday:** 1 commit, 3 files (42,148 lines, mostly a 34,937-line power plant CSV) — NumPy fundamentals, Pandas/NumPy/Matplotlib integration, permutation-based ANOVA, eigen decomposition
+
+**What I saw:** `Week4/Day2/ExerciseXP/exercise_xp.ipynb` runs through the standard 10-exercise NumPy/Pandas/Matplotlib set — determinants and matrix inverses via `np.linalg.det`/`np.linalg.inv`, grayscale vs. RGB image representation as 2D/3D arrays, and a from-scratch effect-size calculation (`mean_diff / std_diff`) for the productivity hypothesis test — competent but templated work, no surprises. `Week4/Day2/DailyChallenge/daily_challenge.ipynb` (Global Power Plant Database, 34,936 plants) is the strongest notebook in the repo so far: `clean_power_plants()` and `completeness_rating()` are documented helper functions that classify each column's missingness before deciding whether to impute, drop, or leave it, rather than blanket-dropping rows. `anova_permutation_test()` builds a rank-based, assumption-free ANOVA entirely from NumPy — factorizing fuel-type labels, computing an observed F-statistic, then generating a null distribution via 2000 random shuffles with `np.random.default_rng(seed)`. That's a direct pickup of the 2026-08-31 recommendation to standardize on `default_rng()` over legacy `np.random.rand`, and it's now driving a real statistical test rather than just array generation. Section 6 also explicitly reframes `groupby().sum()` as one-hot matrix multiplication (`capacity_by_category_matrix()`), and Section 7 uses `np.percentile` to derive capacity-tier cutoffs from the data instead of hand-picked thresholds. The chart-selection reasoning is consistently justified in markdown too — log-scaled axes for the capacity histogram and fuel boxplot ("a normal chart would just show one tall bar near zero"), a 100%-stacked bar instead of a smooth area chart for the by-decade fuel mix ("we don't [have data for every year in between]... implying more continuity than the data actually has").
+
+**Recommendations:**
+- `fuel_type_stats()` and `anova_permutation_test()` in `daily_challenge.ipynb` both re-derive the same per-fuel grouping and `min_n` filtering logic independently — worth factoring the "filter groups by minimum sample size" step into one shared helper the two functions call, the same way `iqr_bounds()` and `pareto_analysis` candidates were flagged for consolidation in the 2026-08-30 review.
+- `exercise_xp.ipynb`'s Exercise 6 hypothesis test computes an effect size but never states a threshold or conclusion (e.g. Cohen's d convention: small/medium/large) — the daily challenge notebook's habit of following every statistic with an explicit interpretation sentence (flagged as a strength on 2026-09-02) hasn't carried over to the exercise notebooks yet; worth closing that gap next.
+
+**Streak:** 2 days (continuation of 2026-09-02's session, same underlying streak — not a new calendar day of activity)
+
 ## 2026-09-02
 
 **Since yesterday:** 3 commits, 6 files — inferential statistics (t-test, ANOVA, correlation), aviation-crash EDA, PCA/dimensionality reduction
