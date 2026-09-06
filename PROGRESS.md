@@ -2,6 +2,20 @@
 
 This is the running, human-readable log kept by the Student Progress Coach. Each daily review is prepended as a new entry at the top, so the most recent entry is always first. See `CLAUDE.md` for the full coaching contract and entry format.
 
+## 2026-09-06
+
+**Catch-up review:** the last review ran 2026-09-03, so this is a delayed check-in covering three days, not a same-schedule daily review. There's only one new commit to look at, and it was made 2026-09-03 at 17:45 — a few hours after that day's review already ran — so nothing happened on 2026-09-04 or 2026-09-05.
+
+**Since yesterday:** 1 commit, 4 files (17,466 lines, mostly two bundled datasets — `train.csv` and the Apple stock-price CSV) — statistical analysis (ANOVA, correlation, skewness/kurtosis), time-series exploration, moving averages
+
+**What I saw:** Two new notebooks land together as "week 4 mini projects." `Week4/Day3/DailyChallenge/data_analysis.ipynb` (mobile phone price-range dataset) runs a clean statistical workflow: it splits columns into binary flags vs. continuous features before summarizing (recognizing that mean/variance don't mean the same thing for a 0/1 flag as for `battery_power`), computes skewness/kurtosis explicitly rather than eyeballing histograms, and correctly reasons about a counter-intuitive result — noting that `fc` (front camera) has the highest skewness *despite* a modest mean/median gap, because its smaller scale amplifies the standardized skewness coefficient. The ANOVA section (`stats.f_oneway` across all `price_range` groups, ranked by F-statistic) is followed up with a boxplot specifically because the markdown calls out that "ANOVA tests mean separation, not overlap" — the visualization is chosen to catch what the summary statistic hides, not just to decorate the notebook. `Week4/Day3/ExerciseXP/mini_project_advanced_statistical_analysis.ipynb` (AAPL 1981–2023) is a full time-series pass: it checks date monotonicity and gaps before analyzing anything (`df["Date"].diff().value_counts()` to catch the one 7-day gap), builds 20-day/100-day rolling moving averages, and runs pairwise year-over-year Welch's t-tests (`equal_var=False`) on closing price — a correct choice given obviously unequal variances across a company's growth history. The Reflection cell is honest about a real mistake: running `describe()` before converting `Date` to datetime gave a "less useful summary," which is exactly the kind of operation-order lesson worth remembering.
+
+**Recommendations:**
+- Both new notebooks stop at "which features/periods differ" (ANOVA F-stats, t-test p-values) without reporting an effect size — this is the same gap flagged in the 2026-09-02 and 2026-09-03 reviews for the Week 3/Week 4 Day 2 notebooks. Since `data_analysis.ipynb` already computes `ram`'s r=0.917 correlation with `price_range` as a natural effect-size stand-in, worth extending that same "pair the test with a magnitude" habit to the AAPL year-pair comparisons (e.g. Cohen's d between year means) rather than only reporting the p-value.
+- `data_analysis.ipynb`'s daily challenge and the AAPL exercise both bundle their source CSVs into the commit (`train.csv`, `Apple Stock Prices (1981 to 2023).csv`) — worth checking whether a `.gitignore` for raw data files is intended going forward, since the repo's line-count history is increasingly dominated by dataset content rather than code.
+
+**Streak:** 2 days (unchanged — this commit lands on 2026-09-03, the same day already counted in the last streak update; no exercise activity is recorded for 2026-09-04 or 2026-09-05)
+
 ## 2026-09-03
 
 **Note:** the commit reviewed here (`e969cc2`, merged via `1596e14`) was made 2026-09-02 at 17:26, a few hours after that day's review already ran — so this is a continuation of yesterday's coding session, not a fresh day of work.
