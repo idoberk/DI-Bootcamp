@@ -2,6 +2,18 @@
 
 This is the running, human-readable log kept by the Student Progress Coach. Each daily review is prepended as a new entry at the top, so the most recent entry is always first. See `CLAUDE.md` for the full coaching contract and entry format.
 
+## 2026-09-07
+
+**Since yesterday:** 0 commits — no new exercise activity since the 2026-09-06 review. No uncommitted work in progress either.
+
+**What I saw:** Nothing to review today. The only commit in the range since the last check is the coach's own `progress-coach: daily review 2026-09-06` entry — no student work landed.
+
+**Recommendations:**
+
+- No new diff to base a recommendation on. The open items from the 2026-09-06 review still stand: pair the AAPL year-over-year t-tests with an effect size (e.g. Cohen's d), and decide whether raw dataset CSVs (`train.csv`, the Apple stock-price file) should be gitignored going forward given the repo's line-count history.
+
+**Streak:** unchanged — no activity today
+
 ## 2026-09-06
 
 **Catch-up review:** the last review ran 2026-09-03, so this is a delayed check-in covering three days, not a same-schedule daily review. There's only one new commit to look at, and it was made 2026-09-03 at 17:45 — a few hours after that day's review already ran — so nothing happened on 2026-09-04 or 2026-09-05.
