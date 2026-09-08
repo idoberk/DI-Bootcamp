@@ -2,6 +2,21 @@
 
 This is the running, human-readable log kept by the Student Progress Coach. Each daily review is prepended as a new entry at the top, so the most recent entry is always first. See `CLAUDE.md` for the full coaching contract and entry format.
 
+## 2026-09-08
+
+**Note:** the commit reviewed here (`0fd54dc`) is dated 2026-09-07 13:11, a few hours after that day's review already ran at 09:33 — so this is picking up work the previous review missed, not a fresh catch-up over a multi-day gap.
+
+**Since yesterday:** 1 commit, 4 files (101,824 lines, mostly one bundled 100,001-row diabetes CSV) — logistic regression, `Pipeline`/`ColumnTransformer` preprocessing, precision/recall/F1/confusion matrix, ROC/AUC
+
+**What I saw:** Two solid logistic-regression notebooks land together. `Week5/Day1/DailyChallenge/daily_challenge.ipynb` is a clean first pass — scatter-plots admitted vs. not-admitted by exam score, fits `LogisticRegression` directly on the two raw features, and the closing markdown cell does real interpretation rather than just restating numbers: it uses the fitted coefficients and intercept to hand-compute the exam2 score needed to cross the 50% threshold at a given exam1 score (`(25.05 - 0.205*60) / 0.200 ≈ 63`), then checks that against the scatter plot's diagonal separation. `Week5/Day1/ExerciseXP/exercise_xp.ipynb` is a clear step up in rigor: instead of fitting on raw columns, it builds a `ColumnTransformer` (`StandardScaler` for `age`/`bmi`/`HbA1c_level`/`blood_glucose_level`, `OneHotEncoder` for `gender`/`smoking_history`) inside a `Pipeline`, and the markdown justifies *why* — noting the numeric features sit on wildly different scales (age ~0-80 vs. blood_glucose_level ~80-300) and standardization stops the largest-magnitude feature from dominating the gradient regardless of actual predictiveness. The precision/recall discussion in Exercise 4 goes beyond definitions to a judgment call grounded in the actual confusion matrix (179 false positives vs. 612 false negatives out of 1,700 positives), reasoning that a missed diabetes diagnosis is costlier than an unnecessary follow-up test and recommending a lower classification threshold to favor recall — a genuine cost-sensitive framing, not boilerplate. The ROC/AUC cell (Exercise 6) correctly reads the curve's shape rather than just quoting the 0.963 AUC, connecting the steep early rise to "an aggressive low threshold buys high recall without much false-positive cost," which lines up with the earlier recall-first recommendation instead of contradicting it.
+
+**Recommendations:**
+
+- `exercise_xp.ipynb`'s Exercise 5 decision-boundary plot silently drops the categorical features and fits a second 2-feature-only pipeline (`pipe2`) just to get something plottable in 2D — worth a one-line markdown note next time acknowledging that this boundary is *not* the real model's boundary (which lives in a much higher-dimensional post-one-hot space), so a reader doesn't mistake the 2D contour for the actual decision surface.
+- The daily challenge's `LogisticRegression` is fit on raw, unscaled exam scores while the exercise_xp notebook scales everything — since both are the same algorithm on the same day, it's worth carrying the "why we standardize" reasoning from exercise_xp back into the daily challenge, even though its two features happen to be on a similar scale here.
+
+**Streak:** 1 day (reset — the last day with actual exercise work was 2026-09-03; 2026-09-04 through 2026-09-06 had no commits, so this doesn't chain onto the earlier streak)
+
 ## 2026-09-07
 
 **Since yesterday:** 0 commits — no new exercise activity since the 2026-09-06 review. No uncommitted work in progress either.
