@@ -2,6 +2,19 @@
 
 This is the running, human-readable log kept by the Student Progress Coach. Each daily review is prepended as a new entry at the top, so the most recent entry is always first. See `CLAUDE.md` for the full coaching contract and entry format.
 
+## 2026-09-09
+
+**Since yesterday:** 1 commit, 3 files (4,786 lines) — classification model comparison (logistic regression, SVM, XGBoost, KNN, random forest), `GridSearchCV`, `ColumnTransformer`, confusion matrix, ROC/AUC
+
+**What I saw:** `Week5/Day2/ExerciseXP/exercise_xp.ipynb` extends the Pipeline/ColumnTransformer pattern from Day 1 into a full 3-model × grid-search comparison on the heart disease dataset: logistic regression, SVM, and XGBoost, each fit once plain and once through `GridSearchCV(cv=5, scoring="f1")`, with a shared `eval_and_report()` helper (cell `7124641b`) that computes accuracy/precision/recall/F1 and draws both a confusion matrix and an ROC curve — a genuine step up from Day 1's one-off metric printouts into a reusable function called six times. `Week5/Day2/DailyChallenge/daily_challenge.ipynb` (breast cancer diagnosis) carries forward the cost-sensitive reasoning flagged as a strength in yesterday's review: when Random Forest and SVM tie on accuracy at 0.9737, the notebook doesn't stop there — it pulls both confusion matrices and specifically calls out false negatives (`cm[1][0]`) as "missing a malignant case," correctly identifying that a tied accuracy score can hide different risk profiles. The markdown throughout `daily_challenge.ipynb` is also noticeably more explanatory than earlier notebooks — nearly every code cell is preceded by a sentence explaining *why* the step matters (e.g. the scaling cell explains that Logistic Regression fails to converge without it), not just what it does.
+
+**Recommendations:**
+
+- `exercise_xp.ipynb`'s `cat_cols` (cell `17c2853c`) includes `sex`, `fasting blood sugar`, and `exercise induced angina` — all already binary 0/1 numeric columns — and one-hot encodes them anyway, which just produces two perfectly anti-correlated columns per feature instead of one. Worth moving truly-binary numeric columns into `num_cols` (or leaving them untouched) rather than one-hot encoding values that are already numeric.
+- The comparison table in `exercise_xp.ipynb` (cell `3e7b0819`) shows grid search making XGBoost *worse* on the test set (F1 0.816 → 0.784) and leaving logistic regression completely unchanged — both are worth a line of markdown diagnosing why, e.g. that `scoring="f1"` optimizes 5-fold CV performance on 216 training rows, which doesn't always transfer to a 54-row hold-out set. Right now the notebook shows the table but doesn't comment on the counterintuitive result, which is exactly the kind of thing the ROC/AUC interpretation in yesterday's Day 1 notebook did well.
+
+**Streak:** 2 days in a row
+
 ## 2026-09-08
 
 **Note:** the commit reviewed here (`0fd54dc`) is dated 2026-09-07 13:11, a few hours after that day's review already ran at 09:33 — so this is picking up work the previous review missed, not a fresh catch-up over a multi-day gap.
