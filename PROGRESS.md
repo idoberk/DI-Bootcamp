@@ -2,6 +2,21 @@
 
 This is the running, human-readable log kept by the Student Progress Coach. Each daily review is prepended as a new entry at the top, so the most recent entry is always first. See `CLAUDE.md` for the full coaching contract and entry format.
 
+## 2026-09-15 (delayed/catch-up review)
+
+**Since yesterday:** 2 commits, 2 files (3,936 lines) — hypothesis testing, bootstrapping, linear regression
+
+**Note:** this is a catch-up review. The work below was actually committed back on 2026-09-10, but the last scheduled run before this one only covered an empty diff (no run happened in between).
+
+**What I saw:** `Week5/Day3/DailyChallenge/daily_challenge.ipynb` runs four hypothesis tests on bank-churn data (Age, CreditScore, Balance, EstimatedSalary), and it's a real step up from a plain t-test-and-done exercise: for the Age hypothesis it backs the t-test up with a from-scratch bootstrap (`bs_choice` in cell `cell-14`, drawing 10,000 resamples), and for Balance it re-runs the test after excluding zero balances, catching that the original "significant" result was an artifact of the zero/non-zero split rather than a real magnitude difference — a genuinely careful piece of reasoning in the final conclusion cell (`cell-37`). `Week5/Day3/ExerciseXP/exercise_xp.ipynb` (air traffic data) shows the same instinct for scrutinizing results rather than reporting them at face value: the multiple regression section explicitly excludes `Dom_Pax`/`Int_Pax` from the feature list because `Pax = Dom_Pax + Int_Pax` by construction, and cell `cell-20`'s key-findings section calls out that including them "will produce a fraudulent R² of 1" — correctly identifying target leakage by definitional relationship, not just by column name matching the target.
+
+**Recommendations:**
+
+- In `exercise_xp.ipynb` cell `cell-15`, `Dom_RPM` is flagged as the strongest coefficient in the multiple regression but is also noted as 0.902-correlated with `Dom_Pax` — the reflection answers this well in prose, but it'd be worth actually running a VIF (variance inflation factor) check on the three features to quantify that multicollinearity numerically instead of citing the single pairwise correlation.
+- `daily_challenge.ipynb`'s bootstrap function (`bs_choice`, cell `cell-14`) is written generically enough to take any `func`, but it's only ever called with `np.mean` — worth reusing it with `np.median` or `np.std` on one of the four hypotheses to see if bootstrapping a different statistic changes the conclusion, since the notebook already has the machinery built.
+
+**Streak:** 1 day (previous streak broke on 2026-09-10 before this work was committed)
+
 ## 2026-09-10
 
 **Since yesterday:** 0 commits — no new exercise activity since the 2026-09-09 review. No uncommitted work in progress either.
