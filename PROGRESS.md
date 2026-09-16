@@ -2,6 +2,19 @@
 
 This is the running, human-readable log kept by the Student Progress Coach. Each daily review is prepended as a new entry at the top, so the most recent entry is always first. See `CLAUDE.md` for the full coaching contract and entry format.
 
+## 2026-09-16
+
+**Since yesterday:** 1 commit, 5 files (5,673 lines) — classification (logistic regression), regression model comparison (linear regression, decision tree, random forest), feature engineering, missing-value strategy
+
+**What I saw:** Two full mini-projects landed in one commit, and both go well beyond a single fit-and-score exercise. `Week5/Day4/DailyChallenge/mini_project_pokemon_win_prediction_analysis.ipynb` engineers a `win_percentage` target from `combats.csv` by concatenating both `First_pokemon`/`Second_pokemon` columns for total-appearance counts and reindexing the `Winner` value_counts against them — a non-obvious use of `pd.concat` + `value_counts` + `reindex` to solve a "wins over appearances, not over rows" problem correctly. It then compares three regressors (`LinearRegression`, `DecisionTreeRegressor`, `RandomForestRegressor`) through one shared `train_and_evaluate()` helper with type hints and a docstring, called via a dict comprehension (`{name: train_and_evaluate(model, ...) for name, model in models.items()}`) instead of three copy-pasted blocks — a cleaner pattern than the notebook-by-notebook repetition flagged in earlier reviews. `Week5/Day4/ExerciseXP/mini_project_predict_heart_disease.ipynb` shows equally deliberate preprocessing reasoning: `ca`/`thal`/`slope` are dropped outright rather than imputed because they're missing on 33-66% of rows, `chol` values of 0 are treated as missing-data placeholders (`replace(0, np.nan)`) rather than real cholesterol readings before median-filling, and the train/test split happens *before* `StandardScaler.fit_transform` specifically to avoid leaking test-set statistics into training — a subtlety that's easy to get backwards and is called out explicitly in the markdown.
+
+**Recommendations:**
+
+- The Pokemon notebook's `train_and_evaluate()` only reports MAE; since the three models are already being compared side by side, adding R² or comparing MAE against the target's own standard deviation would make it clear whether a "better" MAE is actually a meaningful improvement or noise between three similarly-weak models.
+- The heart disease notebook uses a plain 80/20 split with `random_state=42` for both preprocessing decisions and the final logistic regression fit — worth trying `cross_val_score` (already familiar territory from the Day 2 `GridSearchCV` work) to check whether the reported 79.9% accuracy holds up across folds or is sensitive to this particular split.
+
+**Streak:** 2 days in a row
+
 ## 2026-09-15 (delayed/catch-up review)
 
 **Since yesterday:** 2 commits, 2 files (3,936 lines) — hypothesis testing, bootstrapping, linear regression
