@@ -2,6 +2,18 @@
 
 This is the running, human-readable log kept by the Student Progress Coach. Each daily review is prepended as a new entry at the top, so the most recent entry is always first. See `CLAUDE.md` for the full coaching contract and entry format.
 
+## 2026-09-17
+
+**Since yesterday:** 0 commits — no new exercise activity since the 2026-09-16 review. No uncommitted work in progress either.
+
+**What I saw:** Nothing to review today. The only commit in range since the last check is the coach's own `progress-coach: daily review 2026-09-16` entry — no student work landed on top of the Pokemon/heart-disease mini-projects reviewed yesterday.
+
+**Recommendations:**
+
+- None today — the Week5/Day4 mini-projects were left in solid shape yesterday (helper-function pattern, correct scale-after-split ordering); pick up wherever Week5 continues next, or act on yesterday's R²/cross-validation suggestions if you want to revisit those two notebooks.
+
+**Streak:** broken — no commits today; last active day was 2026-09-16.
+
 ## 2026-09-16
 
 **Since yesterday:** 1 commit, 5 files (5,673 lines) — classification (logistic regression), regression model comparison (linear regression, decision tree, random forest), feature engineering, missing-value strategy
