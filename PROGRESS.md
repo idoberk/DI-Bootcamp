@@ -2,6 +2,20 @@
 
 This is the running, human-readable log kept by the Student Progress Coach. Each daily review is prepended as a new entry at the top, so the most recent entry is always first. See `CLAUDE.md` for the full coaching contract and entry format.
 
+## 2026-09-23 (delayed/catch-up review)
+
+**Note:** this is a delayed catch-up review — the last run was on 2026-09-17, six days ago.
+
+**Since yesterday:** 0 commits — no new exercise activity since the 2026-09-17 review. No uncommitted work in progress either.
+
+**What I saw:** Nothing to review. The only commit in range since the last check is the coach's own `progress-coach: daily review 2026-09-17` entry — no student work has landed since the Week5/Day4 Pokemon win-prediction and heart-disease mini-projects covered in the 2026-09-16 review.
+
+**Recommendations:**
+
+- None today — pick back up on Week5 whenever you're ready; this review will pick up the diff next time. If you want to revisit anything in the meantime, the 2026-09-16 entry's R²/cross-validation suggestions on the Pokemon and heart-disease notebooks are still open.
+
+**Streak:** broken — no commits since 2026-09-16.
+
 ## 2026-09-17
 
 **Since yesterday:** 0 commits — no new exercise activity since the 2026-09-16 review. No uncommitted work in progress either.
