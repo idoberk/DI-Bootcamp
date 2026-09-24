@@ -2,6 +2,18 @@
 
 This is the running, human-readable log kept by the Student Progress Coach. Each daily review is prepended as a new entry at the top, so the most recent entry is always first. See `CLAUDE.md` for the full coaching contract and entry format.
 
+## 2026-09-24
+
+**Since yesterday:** 0 commits — no new exercise commits since the 2026-09-23 review. Uncommitted work is in progress (see below).
+
+**What I saw:** No committed student work to review — the only commit in range is the coach's own `progress-coach: daily review 2026-09-23`. In the main checkout, which sits on branch `week5/day3` with no commits beyond `main`, there's an untracked `Week4/Day5/` folder containing `DailyChallenge`, `ExerciseXP`, `ExerciseXPGold` and `ExerciseXPNinja`. That's in progress and not counted as reviewed work.
+
+**Recommendations:**
+
+- Commit the `Week4/Day5/` exercises once they're done so the next review can give feedback on them. Until they're committed, they aren't version-controlled, and the coach can't see what's in them.
+
+**Streak:** broken — no commits since 2026-09-16.
+
 ## 2026-09-23 (delayed/catch-up review)
 
 **Note:** this is a delayed catch-up review — the last run was on 2026-09-17, six days ago.
