@@ -2,6 +2,20 @@
 
 This is the running, human-readable log kept by the Student Progress Coach. Each daily review is prepended as a new entry at the top, so the most recent entry is always first. See `CLAUDE.md` for the full coaching contract and entry format.
 
+## 2026-09-30 (delayed/catch-up review)
+
+**Note:** this is a delayed catch-up review — the last run was on 2026-09-24, six days ago.
+
+**Since yesterday:** 0 commits — no new exercise commits since the 2026-09-24 review. Uncommitted work is still in progress (see below).
+
+**What I saw:** No committed student work to review — the only commit in range is the coach's own `progress-coach: daily review 2026-09-24`. The main checkout is still on `week5/day3` with the same untracked `Week4/Day5/` folder flagged last time, and nothing in it has changed: `ExerciseXP/exercise_xp.ipynb` was last modified on 2026-09-06, while `DailyChallenge`, `ExerciseXPGold` and `ExerciseXPNinja` are still empty folders. That's in progress and not counted as reviewed work.
+
+**Recommendations:**
+
+- `Week4/Day5/ExerciseXP/exercise_xp.ipynb` has been sitting uncommitted for over three weeks. If it's finished, commit it on its own branch (the way `week4/day3` was done) so it's version-controlled and the next review can give feedback on it. If you've decided to skip the Gold/Ninja/DailyChallenge parts, delete those empty folders so they stop showing up as in-progress work.
+
+**Streak:** broken — no commits since 2026-09-16.
+
 ## 2026-09-24
 
 **Since yesterday:** 0 commits — no new exercise commits since the 2026-09-23 review. Uncommitted work is in progress (see below).
