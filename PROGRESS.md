@@ -2,6 +2,21 @@
 
 This is the running, human-readable log kept by the Student Progress Coach. Each daily review is prepended as a new entry at the top, so the most recent entry is always first. See `CLAUDE.md` for the full coaching contract and entry format.
 
+## 2026-10-01
+
+**Since yesterday:** 4 commits, 13 files — SQL basics (CREATE/INSERT/UPDATE/DELETE), filtering with WHERE/LIKE/ILIKE/IN, ORDER BY/LIMIT/OFFSET, subqueries, NULL semantics in NOT IN, joins
+
+**What I saw:** You're back after a two-week gap, and Week 7 is a new topic: SQL. All four commits landed on 2026-09-30 and cover Day 1 and Day 2. In `Week7/Day2/ExerciseXP/exercise_xp_dvdrental_database.sql` you found the missing inventory with a `LEFT JOIN inventory ... WHERE i.inventory_id IS NULL` anti-join. For the "next 10 cheapest" bonus you used `OFFSET 10 ROWS FETCH NEXT 10 ROWS ONLY` instead of `LIMIT`. In `Week7/Day1/ExerciseXPGold/exercise_xp_gold.sql` you wrapped the "first four students" query in a subquery (`AS first_four`) so the result could be re-sorted by `last_name`, which shows you get that `LIMIT` runs before the outer `ORDER BY`. In `Week7/Day2/DailyChallenge/daily_challenge.sql` you wrote your predictions as comments (`-- 0`, `-- 2`, `-- 0`, `-- 2`), and they're correct: you saw that a `NULL` inside a `NOT IN` list makes every row drop out. There's also untracked work in progress in the main checkout: `Week7/Day2/ExerciseXPGold/` and the older `Week4/Day5/`. It isn't counted here.
+
+**Recommendations:**
+
+- `Week7/Day1/ExerciseXP/exercise_xp.sql` doesn't match the instructions in two places. Customer 2 was inserted as `('Sandra', 'Scott')` instead of `Sandra Jones`, so your `last_name = 'Jones'` query only returns Greg. The last query filters `first_name != 'Jones'`, but the task asks for first names that are not `'Scott'`. Fix the row and change the filter to `first_name != 'Scott'`.
+- `Week7/Day1/DailyChallenge/daily_challenge.sql` has two loose ends:
+  - The final `INSERT` leaves out `first_name`. Because `first_name` is `NOT NULL`, that insert should fail. The task asked you to predict this, so add a `--` comment with your prediction and the actual error, the way you did in the Day 2 challenge.
+  - That file also mixes date literals: `'08/10/1970'` and `'21/10/1993'` read as different day/month orders, so at least one is probably stored wrong or rejected, depending on `DateStyle`. Use `TO_DATE(..., 'DD/MM/YYYY')`, like you already do in `exercise_xp_plus.sql`.
+
+**Streak:** 1 day — new streak (previous commits were on 2026-09-16)
+
 ## 2026-09-30 (delayed/catch-up review)
 
 **Note:** this is a delayed catch-up review — the last run was on 2026-09-24, six days ago.
