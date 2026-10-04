@@ -2,6 +2,25 @@
 
 This is the running, human-readable log kept by the Student Progress Coach. Each daily review is prepended as a new entry at the top, so the most recent entry is always first. See `CLAUDE.md` for the full coaching contract and entry format.
 
+## 2026-10-04 (delayed/catch-up review)
+
+**Note:** this is a delayed catch-up review. The last run was on 2026-10-01, so the 10-02 and 10-03 reviews didn't happen.
+
+**Since yesterday:** 2 commits (1 exercise commit + the `week7/day2` merge), 3 files — UPDATE/DELETE, ALTER TABLE, COUNT/SUM with GROUP BY, INSERT … SELECT, foreign keys, scalar subqueries in INSERT, multi-table joins
+
+**What I saw:** Both commits landed on 2026-10-01: `Added gold exercise` plus the merge of `week7/day2`. Last review flagged `Week7/Day2/ExerciseXPGold/` as untracked, and it's now committed. In `exercise_xp_gold.sql`, Omer Simpson's retake (lines 154–165) is an `INSERT … SELECT` that copies `birth_date` from his existing row. That's better than retyping the date. The `purchases` insert (lines 210–274) looks up every `customer_id` and `item_id` with a scalar subquery, which is what the task asked for. The final question has a correct explanation (line 345): the insert fails because of your `NOT NULL`, not because of the foreign key, since FKs accept `NULL`. Two loose ends:
+- Line 11 reads `COUNT(*) rating`. The missing `AS` makes `rating` the alias, so the result has two columns named `rating`.
+- The two Day 1 fixes from the last review (`Sandra Jones` and the `!= 'Scott'` filter in `Week7/Day1/ExerciseXP/exercise_xp.sql`) haven't been made yet.
+
+`Week4/Day5/` is still untracked in the main checkout. It's in progress and isn't counted here.
+
+**Recommendations:**
+
+- Line 111 adds `math_grade NUMERIC(5, 2) NOT NULL DEFAULT 0`, so every student outside ids 1, 2, 4 and 6 (never graded) gets a real-looking grade of `0`. Your line 176 `COUNT(math_grade) AS total_grade` therefore counts them as having one grade, and the bonus result only looks right by accident. Drop `NOT NULL DEFAULT 0` so ungraded students stay `NULL`, then re-run lines 176 and 186 and compare the results. That shows how `COUNT(col)` and `SUM` skip `NULL`s.
+- Line 69 sets `birth_date = '11/02/1998'`, but the task says `02/11/1998`, and you swapped the day and month by hand to suit the server's `DateStyle`. Last review flagged the same date ambiguity in Day 1. Use an ISO literal like `'1998-11-02'` or `TO_DATE('02/11/1998', 'DD/MM/YYYY')` so the date is the same under any setting. Also change line 11 to `COUNT(*) AS film_count`.
+
+**Streak:** 2 days (2026-09-30 → 2026-10-01). There have been no commits on 10-02 or 10-03, so this streak has lapsed.
+
 ## 2026-10-01
 
 **Since yesterday:** 4 commits, 13 files — SQL basics (CREATE/INSERT/UPDATE/DELETE), filtering with WHERE/LIKE/ILIKE/IN, ORDER BY/LIMIT/OFFSET, subqueries, NULL semantics in NOT IN, joins
