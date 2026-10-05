@@ -2,6 +2,19 @@
 
 This is the running, human-readable log kept by the Student Progress Coach. Each daily review is prepended as a new entry at the top, so the most recent entry is always first. See `CLAUDE.md` for the full coaching contract and entry format.
 
+## 2026-10-05
+
+**Since yesterday:** 0 commits, 0 files — no new committed work
+
+**What I saw:** There are no new exercise commits since the last review. The only commit after `395012d` is the coach's own `a7b50a6`. Work is in progress, though. The main checkout is on a new `week7/day3` branch, which has no commits yet. It has an untracked `Week7/Day3/ExerciseXP/exercise_xp.sql` (148 lines) that starts Exercise 1 on dvdrental: it lists the `language` table, `INNER JOIN`s films to their language, and flips to `language LEFT JOIN film` to keep languages that have no films. That's the right way round for "all languages, even with no films". `Week4/Day5/` is also still untracked. None of this counts as reviewed work until it's committed.
+
+**Recommendations:**
+
+- Commit `Week7/Day3/ExerciseXP/exercise_xp.sql` on `week7/day3` as you go, even if it's half done. Then the next review can give feedback on your JOIN work instead of just noting it's in progress.
+- The loose ends from the last two reviews are still open: `Sandra Jones` and the `!= 'Scott'` filter in `Week7/Day1/ExerciseXP/exercise_xp.sql`, and `COUNT(*) rating` without `AS` on line 11 of `Week7/Day2/ExerciseXPGold/exercise_xp_gold.sql`. They're quick fixes. Do them before Day 3 piles up.
+
+**Streak:** 0 days. The last commits were on 2026-10-01, so the streak has lapsed.
+
 ## 2026-10-04 (delayed/catch-up review)
 
 **Note:** this is a delayed catch-up review. The last run was on 2026-10-01, so the 10-02 and 10-03 reviews didn't happen.
