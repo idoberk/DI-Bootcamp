@@ -2,6 +2,23 @@
 
 This is the running, human-readable log kept by the Student Progress Coach. Each daily review is prepended as a new entry at the top, so the most recent entry is always first. See `CLAUDE.md` for the full coaching contract and entry format.
 
+## 2026-10-06
+
+**Since yesterday:** 2 commits (1 exercise commit + the `week7/day3` merge), 4 files: LEFT vs INNER JOIN, ON DELETE CASCADE, CHECK/UNIQUE constraints, one-to-one and many-to-many relationships, junction tables, NULL-aware filtering, multi-table joins
+
+**What I saw:** Yesterday's untracked `Week7/Day3/ExerciseXP/exercise_xp.sql` is now committed and finished, along with the Day 3 Daily Challenge. Some lessons from earlier reviews are now showing up in your code:
+- The junction-table inserts in `daily_challenge.sql` (lines 185, 204, 223, 242) use ISO dates like `'2022-02-15'`. The last review asked for exactly that, and it means you no longer swap day and month by hand to suit `DateStyle`.
+- Line 93 counts not-logged-in customers with `cp.isLoggedIn IS NOT TRUE` after a `LEFT JOIN`, and the comment explains that this also catches Lea's `NULL`. A plain `= FALSE` would have missed her, so the `NOT IN`/`NULL` lessons have stuck.
+- Line 19 puts `UNIQUE` on `customer_profile.customer_id` and says that's what makes the relationship one-to-one.
+- In `exercise_xp.sql`, Matthew Mahan's return window (lines 236–237) uses a half-open range, `>= '2005-07-28' AND < '2005-08-02'`, so returns made late on Aug 1 are still included.
+
+**Recommendations:**
+
+- `exercise_xp.sql` lines 135–139 run `UPDATE film SET language_id = 3 WHERE film_id IN (3, 5, 6, 7, 9, 11)`, with both the language and the films hardcoded by id. In the same file (lines 78–85) and all through the daily challenge, you look ids up by name with a scalar subquery. Do the same here: `SET language_id = (SELECT language_id FROM language WHERE name = 'Japanese')`. Then the query says which language you meant, and it can't silently point at the wrong row.
+- Lines 168–184 ("30 most expensive outstanding movies") sort by `rental_rate DESC` first and only use `replacement_cost` to break ties. The task doesn't say which "expensive" it means, and the order you pick changes which 30 come back. Add a comment saying which one you chose and why. Also, the Day 1 (`Sandra Jones` / `!= 'Scott'`) and Day 2 Gold (`COUNT(*) rating` on line 11) fixes are still open. This is the third review to mention them, so they're worth five minutes before Day 4.
+
+**Streak:** 1 day (2026-10-05). The streak restarted after the gap on 10-02 to 10-04. `Week4/Day5/` is still untracked in the main checkout (in progress, not reviewed).
+
 ## 2026-10-05
 
 **Since yesterday:** 0 commits, 0 files — no new committed work
