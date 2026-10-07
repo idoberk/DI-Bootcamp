@@ -2,6 +2,18 @@
 
 This is the running, human-readable log kept by the Student Progress Coach. Each daily review is prepended as a new entry at the top, so the most recent entry is always first. See `CLAUDE.md` for the full coaching contract and entry format.
 
+## 2026-10-07
+
+**Since yesterday:** 0 commits, 0 files — no new committed work
+
+**What I saw:** Nothing new has been committed since the `Added week 7 day 3 daily challenges` commit (`f214f25`) that the last review covered. The only commit after it is the coach's own `b5090ed`. There are no uncommitted changes in this worktree, so I have nothing new to review. I'm not adding a stats line for today, so the streak isn't padded.
+
+**Recommendations:**
+
+- The three open items from the last review are still the best use of a short session before Day 4. First, replace the hardcoded `SET language_id = 3` in `Week7/Day3/ExerciseXP/exercise_xp.sql` (lines 135-139) with a scalar subquery on `language.name`. Second, add a comment on the "30 most expensive" sort (lines 168-184) saying which column you treat as "expensive". Third, fix the `Sandra Jones` / `!= 'Scott'` query from Day 1.
+
+**Streak:** 0 days. The last day with commits was 2026-10-06.
+
 ## 2026-10-06
 
 **Since yesterday:** 2 commits (1 exercise commit + the `week7/day3` merge), 4 files: LEFT vs INNER JOIN, ON DELETE CASCADE, CHECK/UNIQUE constraints, one-to-one and many-to-many relationships, junction tables, NULL-aware filtering, multi-table joins
