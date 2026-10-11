@@ -76,14 +76,6 @@ ORDER BY g.genre_id, m.release_date, m.movie_id;
 
 -- 🌟 Task 4: Identify the Highest-Grossing Movie Series
 -- Identify the movie series (based on shared keywords) with the highest total revenue. Use window functions and CTEs to group movies by their series and calculate the total revenue.
-Here is a solution. I'm giving it in chat, not editing your file, and I haven't run it. The table and column names (keyword, movie_keywords, keyword_name) are my assumptions from your earlier schema, so adjust them if they differ.
-
-
--- Series = a keyword shared by 2 to 20 movies (with recorded revenue).
--- Below 2 isn't a series; above 20 is usually a generic tag like "sequel"
--- or "based on novel". Revenue of 0 is treated as unrecorded and excluded.
--- Keyword groups overlap (a movie has many keywords), which is fine because
--- each series total sums only its own movies; totals are never added together.
 WITH movie_keyword_revenue AS (
     SELECT k.keyword_id,
         k.keyword_name,
