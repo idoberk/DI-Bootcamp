@@ -2,6 +2,21 @@
 
 This is the running, human-readable log kept by the Student Progress Coach. Each daily review is prepended as a new entry at the top, so the most recent entry is always first. See `CLAUDE.md` for the full coaching contract and entry format.
 
+## 2026-10-11
+
+**Since yesterday:** 2 commits, 4 files — correlated subqueries, nested subqueries, temp tables, UPDATE/DELETE with subqueries, CTE chains
+
+**What I saw:** This is a delayed catch-up review: the last run was 2026-10-09, so it covers the Week 7 Day 4 work (`2954f40`, plus the merge commit `8ac0fec`) that landed after it. In `Week7/Day4/ExerciseXP/exercise_xp.sql` you used a correlated scalar subquery in the SELECT list of `medal_winner_ages` (Exercise 1, Task 1) and a `DELETE ... WHERE competitor_id NOT IN (...)` on a temp table, both as the exercise asked. In the `UPDATE person_copy` (Exercise 2, Task 1) you added two indexes first and capped the update at `pc.id <= 1000` with a comment explaining why. That is real thinking about performance, not just getting the query to run. In `DailyChallenge/daily_challenge.sql` the `best_events` -> `best_per_person_region` CTE chain is a clean way to avoid ties double-counting a person's best event.
+
+**Recommendations:**
+
+- `four_plus_games_no_medal` in `Week7/Day4/DailyChallenge/daily_challenge.sql` filters with `WHERE p.id NOT IN (SELECT person_id FROM medal_winners)`. It works only as long as `person_id` is never NULL; switch to `NOT EXISTS` (or a `LEFT JOIN ... WHERE x IS NULL`) to apply the NULL-semantics lesson from Week 6. The same goes for the `NOT IN` in the `DELETE` in `exercise_xp.sql`.
+- In Exercise 2, Task 2 (`multi_event_competitors`), the `WHERE ce.competitor_id IN (SELECT ... HAVING COUNT(DISTINCT event_id) > 1)` repeats the same grouping the outer query already does. Try moving the `HAVING COUNT(DISTINCT ce.event_id) > 1` onto the outer `GROUP BY ce.competitor_id` and compare the results and the `EXPLAIN` output.
+- For `two_sport_medal_winners` (Daily Challenge, Exercise 1), the `LIMIT 3` in `top_three` silently drops ties at third place. Add a tiebreaker such as `person_id` to `ORDER BY`, or use `RANK()`, so the result is deterministic.
+- Your header comment on the `UPDATE person_copy` query says it is slow. Run `EXPLAIN ANALYZE` on it. Then try rewriting the triple-nested `IN` as a join against a per-region average computed once in a CTE.
+
+**Streak:** 1 day in a row (2026-10-09 had commits; 2026-10-07 and 2026-10-08 had none)
+
 ## 2026-10-09
 
 **Since yesterday:** 0 commits, 0 files — no new committed work
