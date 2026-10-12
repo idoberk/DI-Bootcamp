@@ -2,6 +2,21 @@
 
 This is the running, human-readable log kept by the Student Progress Coach. Each daily review is prepended as a new entry at the top, so the most recent entry is always first. See `CLAUDE.md` for the full coaching contract and entry format.
 
+## 2026-10-12
+
+**Since yesterday:** 2 commits, 4 files — window functions (RANK, DENSE_RANK, NTILE, LAG, FIRST_VALUE, running/rolling frames), CTE chains
+
+**What I saw:** This covers the Week 7 Day 5 work (`3b2a5b0`, the merge `c2b6dc7`, and `3b38f70`), all dated 2026-10-11; it is a normal next-day review. In `Week7/Day5/ExerciseXP/exercise_xp.sql` you combined `NTILE(4)` with `ROW_NUMBER()` inside the `ranked_movies` CTE to get the top 3 per company, and the `director_avg` -> `ranked_directors` pair filters on `rating_rank = 1` after the window runs, the right way to filter on a window result. The strongest piece is `DailyChallenge/daily_challenge.sql`: the `LAG(m.budget)` growth rate divides by `NULLIF(prev_budget::numeric, 0)`, `ORDER BY ... NULLS LAST` handles the first-movie NULLs, and the rolling average in Task 3 adds `m.movie_id` as a tiebreaker to the `ROWS BETWEEN 2 PRECEDING AND CURRENT ROW` frame. In Task 4 you also thought about what counts as a "series" (the `BETWEEN 2 AND 20` filter). `3b38f70` then removed the pasted chat text that had ended up above the Task 4 query, leaving the file clean.
+
+**Recommendations:**
+
+- In the `FIRST_VALUE` query ("Most Recent Movie for Each Genre") and the "Cumulative Revenue" query, you use `SELECT DISTINCT` to collapse window output into one row per group. A plain `GROUP BY` with `SUM(m.revenue)` is clearer for the revenue query. For the genre query, `ROW_NUMBER() ... = 1` in a CTE (as you did in `ranked_movies`) makes the intent explicit.
+- Exercise 2's actor ranking computes `COUNT(*) total_movies` for display but `COUNT(DISTINCT m.movie_id)` inside `DENSE_RANK()`. If an actor can appear twice in `movie_cast` for one movie, the two numbers will disagree. Use the same expression in both, and group by `p.person_id` too, since `GROUP BY p.person_name` would merge two different people with the same name.
+- The running-total query (Exercise 1, Task 3) orders the window by `m.release_date` alone. Movies sharing a date get an arbitrary order, and NULL dates sort last in ascending order. Add `m.movie_id` as a tiebreaker, as you did in Daily Challenge Task 3, and add an outer `ORDER BY genre_name, release_date` so the output reads in order.
+- `cumulative_revenue` in Exercise 2 doesn't exclude `m.revenue = 0`, though your other queries do (`WHERE m.revenue > 0`). Decide on one convention for unrecorded revenue and apply it throughout.
+
+**Streak:** 1 day in a row (commits dated 2026-10-11; none yet on 2026-10-12)
+
 ## 2026-10-11
 
 **Since yesterday:** 2 commits, 4 files — correlated subqueries, nested subqueries, temp tables, UPDATE/DELETE with subqueries, CTE chains
