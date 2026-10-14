@@ -2,6 +2,22 @@
 
 This is the running, human-readable log kept by the Student Progress Coach. Each daily review is prepended as a new entry at the top, so the most recent entry is always first. See `CLAUDE.md` for the full coaching contract and entry format.
 
+## 2026-10-14
+
+**Since yesterday:** 2 commits, 4 files — correlated/nested subqueries, temp tables, CTE chains, UPDATE with subqueries, FILTER aggregates
+
+**What I saw:** This covers the Week 7 Day 4 optional work (`e981b6e` and the merge `7b0fb6c`, both dated 2026-10-13): `ExerciseXPGold` and `ExerciseXPNinja`, plus their `Instructions.md` files. The strongest piece is the individual-vs-team classification: the `team_group` CTE groups medal rows by `(event_id, games_id, medal_id)` with `HAVING COUNT(*) > 1`, and `labeled` tags each row with a row-value `IN` check. You then reused that same chain in `exercise_xp_ninja.sql` and swapped the final `HAVING COUNT(DISTINCT event_type) = 2` for `COUNT(*) FILTER (WHERE event_type = 'team')`, a clean new tool. The top-3 queries (`medals_won_per_region`, `three_different_sport_medal_winners`) use `SELECT DISTINCT ... ORDER BY ... LIMIT 3` inside an `IN` so ties at the cutoff aren't dropped, a deliberate choice that wasn't spelled out in the task. In Gold Exercise 2 you also correctly put a CTE ahead of `UPDATE person_copy`, working on a temp copy instead of the real `person` table.
+
+**Recommendations:**
+
+- In Gold Exercise 1, Task 1 the final line is `ORDER BY l.person_id, p.full_name, total_medals DESC`. Since `person_id` is unique, the later keys never take effect, so `total_medals DESC` does nothing. If you want the biggest medal winners first, lead with `total_medals DESC`.
+- You identify "no medal" two ways: `m.medal_name != 'NA'` in `medal_rows` and `medals_won_per_region`, but a hardcoded `c_event.medal_id != 4` in `medal_winners`, `multi_games_winners` and the Ninja Exercise 2 CTE. The magic number works only if `NA` is id 4. Use the `JOIN medal` + `medal_name` check everywhere, or at least comment the `4`.
+- The team/individual CTE chain is pasted in full into both `exercise_xp_gold.sql` and `exercise_xp_ninja.sql`. Since you're already using temp tables, try `CREATE TEMP TABLE labeled_medals AS ...` once and query it from both tasks. Also note the heuristic treats an individual event with a tied medal (two people sharing a bronze) as 'team'. Add a comment saying that's a known approximation.
+- Ninja Exercise 2 asks for "the top 3 competitors", but the tie-aware `IN (... LIMIT 3)` pattern can return more than 3 rows. That's fine, but say so in a comment, or compare it with `DENSE_RANK() <= 3` from your Day 5 window-function work.
+- The Gold Exercise 2 `UPDATE` sets the same average weight for every multi-game winner, but the `weight > 0` filter appears only in the average, not in the target rows. Winners with a 0/NULL weight get overwritten too. Decide if that's what you want.
+
+**Streak:** 1 day in a row (commits dated 2026-10-13; none on 2026-10-12)
+
 ## 2026-10-13
 
 **Since yesterday:** 0 commits, 0 files — no new exercise work
