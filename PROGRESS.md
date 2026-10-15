@@ -2,6 +2,19 @@
 
 This is the running, human-readable log kept by the Student Progress Coach. Each daily review is prepended as a new entry at the top, so the most recent entry is always first. See `CLAUDE.md` for the full coaching contract and entry format.
 
+## 2026-10-15
+
+**Since yesterday:** 0 commits, 0 files — no new exercise work
+
+**What I saw:** No new commits of yours since the last review. The only commit after `7b0fb6c` ("merged week7/day4") is the coach's own `3c97fb5`, and the working tree is clean, so there is no work in progress either. Nothing new to review, so I'm not padding the entry. Your most recent work is the Week 7 Day 4 set, `exercise_xp_gold.sql` and `exercise_xp_ninja.sql`.
+
+**Recommendations:**
+
+- When you next sit down, pick up the quickest open item from yesterday's entry. In Gold Exercise 1, Task 1, move `total_medals DESC` to the front of the `ORDER BY`, because `l.person_id` is unique and the later keys never take effect.
+- While you're in those files, replace the hardcoded `c_event.medal_id != 4` with the `JOIN medal` + `medal_name != 'NA'` check you already use in `medal_rows`.
+
+**Streak:** 0 days — paused (last commits dated 2026-10-13)
+
 ## 2026-10-14
 
 **Since yesterday:** 2 commits, 4 files — correlated/nested subqueries, temp tables, CTE chains, UPDATE with subqueries, FILTER aggregates
