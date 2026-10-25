@@ -2,6 +2,23 @@
 
 This is the running, human-readable log kept by the Student Progress Coach. Each daily review is prepended as a new entry at the top, so the most recent entry is always first. See `CLAUDE.md` for the full coaching contract and entry format.
 
+## 2026-10-25
+
+**Catch-up review:** the last review ran on 2026-10-21, so this one is four days late and did not run on schedule.
+
+**Since yesterday:** 2 commits, 5 files — text preprocessing, NER/POS tagging, BoW/TF-IDF, Word2Vec, vector databases, reranking, RAG
+
+**What I saw:** You're back after nine days without commits. On 2026-10-22 you added Week 8 Day 3 and Day 4. Both commit messages say "daily challenges", but each one also contains the ExerciseXP notebook. Most of the 112k added lines come from the committed `labelled_newscatcher_dataset.csv`. In `Week8/Day3/ExerciseXP/exercise_xp.ipynb`, `preprocess_text` removes `{"not", "no", "nor"}` from the stopword list so "would not recommend" keeps its meaning, and `to_wordnet_pos` maps Penn tags so that "loved" actually lemmatizes. The raw-vs-cleaned NER/POS analysis is backed by the outputs, and its takeaway is to run taggers on raw text and vectorizers on cleaned text. In Day 4, you made both stores safe to re-run with the same pattern: `pc.has_index` → `delete_index` for Pinecone and the `existing` check before `create_collection` for Chroma. You also read the Pinecone key from Colab Secrets or the auth panel and never paste it into a cell.
+
+**Recommendations:**
+
+- Fix the ordering bug in `search_content` (`Week8/Day4/ExerciseXP/exercise_xp.ipynb`). `pdf_to_index[pdf_to_index['id'].isin(ids[0])]` returns rows in DataFrame order, not FAISS rank order, so `results['similarities'] = sims[0]` attaches scores to the wrong headlines, and the "best match first" docstring is false. Use `pdf_to_index.set_index('id').loc[ids[0]]` before adding the scores.
+- Day 4 XP ends with the cell-21 experiment grid (3 questions × `n_context` 1/3/10) and has no analysis cell. The World Cup question was designed to test whether the model says "I don't know", so write down whether it did, the way you wrote Day 3's Summary / Findings.
+- In `Week8/Day3/DailyChallenge/daily_challenge.ipynb`, `pos_tag` and `extract_entities` run on `filtered_tokens`, which are lowercased with stopwords removed. Your own Day 3 XP analysis showed this breaks NER and POS tagging. Rerun those two cells on `word_tokenize` of the original-case text.
+- The last cell of the Day 4 daily challenge (`pc.delete_index(name=index_name)`) never ran (`execution_count` is null), so `medical-notes-index` is probably still in your Pinecone project.
+
+**Streak:** 1 day (both commits on 2026-10-22; none since)
+
 ## 2026-10-21
 
 **Since yesterday:** 0 commits, 0 files — no new exercise work
