@@ -2,6 +2,21 @@
 
 This is the running, human-readable log kept by the Student Progress Coach. Each daily review is prepended as a new entry at the top, so the most recent entry is always first. See `CLAUDE.md` for the full coaching contract and entry format.
 
+## 2026-10-26
+
+**Since yesterday:** 2 commits, 5 files — SQL data cleaning, IQR outliers, normalization, LangChain text splitting, FAISS, RetrievalQA, RAG evaluation
+
+**What I saw:** On 2026-10-25 you finished Week 8 Day 5 (RAG with LangChain) and went back to fill in Day 1 (SQL data cleaning). The Day 1 commit message again says "daily challenges", but it also includes `ExerciseXP/exercise_xp.sql` and `Instructions.md`. In `Week8/Day5/ExerciseXP/exercise_xp.ipynb` you based the chunk size on measurements, not guesses. Cell 10 tokenizes both splits with the MiniLM tokenizer and shows that 50.2% of the 1000-character chunks go over the 256-token embedding window, against 2.0% of the 500-character ones. You then compare both stores side by side with `show_retrieved` and its cosine distances. In the daily challenge, `unmangle` reverses the loader's `json.dumps` before the emptiness filter (15,011 → 4,467 rows), and the `Counter` cell shows which categories were dropped. In Day 1, `SUM(COUNT(DISTINCT employee_id)) OVER ()` brings last week's window functions into a percentage column. The `salaries_rows` vs `df_rows` check confirms that the LEFT JOINs didn't multiply rows.
+
+**Recommendations:**
+
+- Your RAG answers in Day 5 XP cell 20 repeat themselves ("This is the big one…" three times) and answer "Uruguay" to the Uruguay question. Two separate causes: `stuff` with k=4 overflows flan-t5-small's 512-token input (the "763 > 512" warning), and the chain uses LangChain's default prompt, not the "say you are not sure" wording you gave the no-RAG baseline. Pass that wording via `chain_type_kwargs={"prompt": ...}` and add `no_repeat_ngram_size=3` to the `pipeline(...)` call.
+- The 22/22 "grounded" score in the daily challenge (cell 9) is misleading. The answer copies the grilled-cheese chunk word for word, and that chunk doesn't answer "What is cheesemaking?". Word overlap measures copying, not relevance. Add a markdown note saying so. Several code comments say "see below" or "see the warning", but the notebook has only code cells, so write those notes too.
+- Neither Day 5 notebook has a findings cell. The last review flagged the same gap in Day 4. Write 3–4 sentences under XP cell 20 on small vs large chunks and on how the RAG answers compared with the no-RAG ones.
+- In `Week8/Day1/ExerciseXP/exercise_xp.sql`, Exercise 2 runs `TRIM(age)`, `TRIM(salary)` and `salary = ''`, while Exercise 5 runs `AVG(salary)`. In PostgreSQL these can't both work: TRIM and `= ''` fail on a numeric column, and AVG fails on a text one. Check the column types and keep the TRIM/empty-string checks to the text columns. In `daily_challenge.sql`, also decide on the two "Jane Hill" rows (ids 5 and 19). Your name-only check finds them, but the `ROW_NUMBER` delete leaves both because their salary and department differ, so record whether they're the same person.
+
+**Streak:** 1 day (both commits on 2026-10-25; none yet today)
+
 ## 2026-10-25
 
 **Catch-up review:** the last review ran on 2026-10-21, so this one is four days late and did not run on schedule.
