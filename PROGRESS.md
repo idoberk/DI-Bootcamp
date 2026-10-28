@@ -2,6 +2,23 @@
 
 This is the running, human-readable log kept by the Student Progress Coach. Each daily review is prepended as a new entry at the top, so the most recent entry is always first. See `CLAUDE.md` for the full coaching contract and entry format.
 
+## 2026-10-28
+
+**Catch-up review:** the last review ran on 2026-10-26, so this one is a day late and did not run on schedule.
+
+**Since yesterday:** 1 commit, 2 files — BLEU/ROUGE, perplexity, human & adversarial evaluation, T5/GPT-2 summarization, model comparison
+
+**What I saw:** On 2026-10-26 you added Week 9 Day 1. As before, the commit says "daily challenges" but also includes `ExerciseXP/exercise_xp.ipynb`. Both notebooks end with a written findings section (`## Summary / Findings` in the daily challenge, `## Wrap-up` in the XP). The last two reviews flagged that gap, and here it's closed. In the daily challenge, cell 13 goes past the task: it adds one "not" to the reference and shows ROUGE-1 jumping to 0.98 for the opposite meaning, against 0.39 for the correct paraphrase. You also worked out BLEU by hand with `modified_precision` and the brevity penalty (6/18 unigrams, BP 0.895) before calling `sentence_bleu`. In the XP, `summarize_with_gpt2` reserves room in GPT-2's 1024-token window (`n_positions - max_new_tokens - suffix_tokens - 8`) and pads on the left. `clear_memory` explains why `gc.collect()` has to run before `empty_cache()`. The Wrap-up also says the T5 scores may be inflated, because T5 was pre-trained on CNN/DailyMail and you scored it on the train split.
+
+**Recommendations:**
+
+- The Wrap-up says "GPT-2 sometimes invented facts", but the cell-24 side-by-side shows T5 doing it too. t5-small calls Hamilton "the german" (row 0). t5-base says Hamilton "finished second behind Ferrari's Kimi Raikkonen" (that was Alonso) and that Vakulenko will face Julie Ditty "in the final" (she beat Ditty in the semi). Row 0 is your daily-challenge point in real data: it copies "finished second behind Ferrari's Kimi Raikkonen" from the reference, so ROUGE gives the wrong fact credit. Add these examples to the Wrap-up.
+- "t5-base … repeated itself less" isn't true for row 3: t5-base gives "new: police arrest the acting president of ex-prime minister's opposition party" twice. Either count repeated sentences across all 100 rows to back up the claim, or soften the wording.
+- You already load `test_df` (50 rows) and never use it. Since you suspect train-split inflation, run `compare_models` on `test_df` and see whether the t5-base > t5-small > gpt2 ranking and the ~0.36 ROUGE-1 hold.
+- Several summaries stop mid-sentence (t5-small row 1 "…under the", t5-base row 3 "…dismisses the chief"). Cell 6 shows references average 41 words (up to 56), which is more than `MAX_NEW_TOKENS = 64` T5 tokens can usually hold. Try 96–128 and check whether ROUGE recall improves. In the daily challenge, back the BERTScore recommendation with a test: run `evaluate.load("bertscore")` on the paraphrase and the negated sentence from cell 13, and see whether it ranks them the right way round.
+
+**Streak:** 2 days in a row (2026-10-25 and 2026-10-26; none since)
+
 ## 2026-10-26
 
 **Since yesterday:** 2 commits, 5 files — SQL data cleaning, IQR outliers, normalization, LangChain text splitting, FAISS, RetrievalQA, RAG evaluation
