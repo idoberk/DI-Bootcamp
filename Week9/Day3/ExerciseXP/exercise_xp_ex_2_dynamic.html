@@ -1,0 +1,54 @@
+<!--
+🌟 Exercise 2: JavaScript Page vs. HTML Page
+Instructions
+Compare the behavior of a static HTML page with a JavaScript-enhanced HTML page.
+Instructions
+
+Create two HTML files – one with only HTML content and another with HTML and JavaScript.
+In the first file, create a static page with headings, paragraphs, and a list.
+In the second file, add JavaScript to dynamically modify one of the elements on page load (e.g., change the text of a heading).
+Open both files in a web browser and observe the differences in behavior and content rendering.
+Expected Outcome
+
+The static HTML page should display content as is, whereas the JavaScript-enhanced page should show dynamically altered content, illustrating the interactivity added by JavaScript.
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Exercise 2 - JavaScript-Enhanced Page</title>
+</head>
+<body>
+  <!-- Same starting HTML as the static page. -->
+  <h1 id="main-heading">Welcome to My Page</h1>
+  <p id="description">This is a static HTML page. Its content never changes after loading.</p>
+
+  <h2>Favorite Data Tools</h2>
+  <ul id="tools-list">
+    <li>Python</li>
+    <li>Pandas</li>
+    <li>SQL</li>
+  </ul>
+
+  <script>
+    // DOMContentLoaded fires once the HTML is parsed, so the elements exist
+    // before we try to modify them.
+    document.addEventListener("DOMContentLoaded", () => {
+      // 1. Change the heading text.
+      document.getElementById("main-heading").textContent =
+        "Welcome - this heading was changed by JavaScript!";
+
+      // 2. Update the description.
+      document.getElementById("description").textContent =
+        "This page started with the same HTML, but JavaScript modified it on load.";
+
+      // 3. Add a new list item that does not exist in the HTML source.
+      const newItem = document.createElement("li");
+      newItem.textContent = "Selenium (added by JavaScript)";
+      document.getElementById("tools-list").appendChild(newItem);
+    });
+  </script>
+</body>
+</html>
