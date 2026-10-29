@@ -2,6 +2,21 @@
 
 This is the running, human-readable log kept by the Student Progress Coach. Each daily review is prepended as a new entry at the top, so the most recent entry is always first. See `CLAUDE.md` for the full coaching contract and entry format.
 
+## 2026-10-29
+
+**Since yesterday:** 1 commit, 2 files — web scraping, requests, BeautifulSoup, CSS selectors, urllib, robots.txt, pagination
+
+**What I saw:** On 2026-10-28 you added Week 9 Day 2, a new topic: web scraping. As in the last few days, the commit says "daily challenges" but also includes `ExerciseXP/exercise_xp.ipynb`. In the daily challenge, `extract_topics` reads the title (`p.f3`) and the description (`p.f5`) from the same `a[href^="/topics/"]` card and drops repeats with a `seen` set of hrefs. That way the two lists can't get out of line, which can happen when you run two separate `find_all` calls. You also call `raise_for_status()` straight after printing the status, and the Summary admits that "Load more" means the 16 topics are only a sample. In the XP, `get_page_title` counts an empty `<title></title>` as having no title. `count_alerts_for_year` (Exercise 5) goes through CISA's pages with a `MAX_PAGES` limit and stops at the first alert from an earlier year. The XP isn't finished, though. None of its code cells has saved output (every `execution_count` is `null`), Exercise 6 has a note explaining why IMDb fails but no code, and the notebook has no findings section.
+
+**Recommendations:**
+
+- Rerun `Week9/Day2/ExerciseXP/exercise_xp.ipynb` from top to bottom and save it with outputs. Right now a reader can't see the alert count Exercise 5 prints or the headers Exercise 3 finds. Then add a short findings cell, as you did in the daily challenge's `## Summary`.
+- Exercise 6 stops at the "Note on the data source" cell. Finish it with a fallback you can show working. One option: save the Top 250 page from a real browser and parse that local file, the same save-then-parse pattern as `webpage.html` in the daily challenge. Another: fall back to a scrape-friendly source and say which one you used.
+- Exercise 1 asks for "URLs in `<a href="">` tags", but cell 6 prints `link.text` ("Football"…), not the URLs. Print `link["href"]` (or both) so the output shows `#football`, `#basketball`, `#tennis`.
+- You write `fetch_html` in Exercise 4, but Exercises 2 and 3 above it repeat the same `Request(...)`/`urlopen` steps, and cell 14 imports again and redefines `HEADERS`. Move `fetch_html` into the first code cell and call it in all three exercises. Also, in `count_alerts_for_year` the early `return` assumes the CISA list is sorted newest first. Print the first and last date on page 0 to check that, so one older pinned item can't stop the count at zero.
+
+**Streak:** 1 day (2026-10-28; none on 2026-10-27, none yet today)
+
 ## 2026-10-28
 
 **Catch-up review:** the last review ran on 2026-10-26, so this one is a day late and did not run on schedule.
