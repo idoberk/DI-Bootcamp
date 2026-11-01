@@ -2,6 +2,23 @@
 
 This is the running, human-readable log kept by the Student Progress Coach. Each daily review is prepended as a new entry at the top, so the most recent entry is always first. See `CLAUDE.md` for the full coaching contract and entry format.
 
+## 2026-11-01
+
+**Catch-up review:** the last review ran on 2026-10-29, so this one is three days late and did not run on schedule.
+
+**Since yesterday:** 1 commit, 5 files — Selenium, dynamic pages, JavaScript basics, BeautifulSoup, date parsing, pandas cleaning, Seaborn/Matplotlib charts
+
+**What I saw:** On 2026-10-29 you added Week 9 Day 3. As before, the commit says "daily challenges" but also includes the XP: three small HTML files for the JavaScript exercises 1–2 and `ExerciseXP/exercise_xp_scraping.ipynb` for 3–5. The last review asked you to stop repeating the fetch code, and this XP does that. `fetch_rendered_html` and `scrape_records(html, container_selector, fields)` are written once and reused for Rotten Tomatoes, BBC and AccuWeather. `scrape_records` also warns when a field is `None` in every record, which catches a broken selector. The daily challenge is your most complete notebook so far. It saves `tel_aviv_forecast_raw.csv` before any cleaning. `parse_forecast_date` handles the "Today" card and the year rollover, and cell 23 checks that there are no gaps between days. The description is split with `rsplit(" and ", n=1)`, wind is stored as an ordered `Categorical`, and the four charts are each tied to one question. The XP still has no findings section, though, and its execution counts are out of order (cell 2 is `41`, cell 3 is `27`, and cells 7, 12, 25, 28, 31 and 35 have none).
+
+**Recommendations:**
+
+- `create_chrome_driver` always runs `options.add_argument(f"--user-agent={user_agent}")`, even when `user_agent` is `None`. So the Rotten Tomatoes and BBC scrapes ran with the literal user agent `None`. Wrap the line in `if user_agent:` and add `user_agent` to the docstring's Args. Then rerun the XP from top to bottom so the counts are in order.
+- Exercise 5 says "Most common condition: Cloudy (2 of 10 days)". AccuWeather's phrases are free text ("Partly sunny and pleasant"), so nearly every day is its own category. Reduce each phrase to a keyword (sunny / cloudy / rain…) before `value_counts()`, as you did with `rsplit` in the daily challenge. Also, the task says Los Angeles but `WEATHER_URL` is Attica, GA (30607). Explain the switch in the Approach cell, and print `°C` instead of a bare `°` now that you convert the temperatures.
+- In the daily challenge Report, the Insights point to tables you never quote: "the fitted slopes measure how steady that decline is", "the strip chart shows whether…". Put your numbers there: −0.43 °C/day for highs (−5.5 °C over 14 days), week 1 vs week 2 highs of 26.0 → 22.6, and Sunny 25.9 °C vs Light rain 21.5 °C from `category_summary`.
+- Add a short findings cell at the end of the XP, as you did in the daily challenge's `## 8. Report`. One thing to cover: in Exercise 4, all 15 dated BBC articles fall in October, so the month grouping gives a single group. Say so, and mention that you used `bbc.com/technology` and not the `innovation/technology` link in the task.
+
+**Streak:** 2 days in a row (2026-10-28 and 2026-10-29; none since)
+
 ## 2026-10-29
 
 **Since yesterday:** 1 commit, 2 files — web scraping, requests, BeautifulSoup, CSS selectors, urllib, robots.txt, pagination
