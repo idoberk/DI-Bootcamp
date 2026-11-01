@@ -1,0 +1,13 @@
+plan,term_months,monthly_price,renewal_monthly_price,savings_pct,total_due,default_term,features
+Launch,36,4.99,13.99,64,179.64,False,2 Websites; 100GB NVMe Storage; Unmetered Bandwidth; ~ 50K Visitors a month; Live Chat Support from Helpful Humans
+Launch,24,4.99,13.99,64,119.76,False,2 Websites; 100GB NVMe Storage; Unmetered Bandwidth; ~ 50K Visitors a month; Live Chat Support from Helpful Humans
+Launch,12,4.79,14.99,68,57.48,True,2 Websites; 100GB NVMe Storage; Unmetered Bandwidth; ~ 50K Visitors a month; Live Chat Support from Helpful Humans
+Launch,1,16.99,16.99,0,16.99,False,2 Websites; 100GB NVMe Storage; Unmetered Bandwidth; ~ 50K Visitors a month; Live Chat Support from Helpful Humans
+Power,36,5.99,17.99,67,215.64,False,10 Websites; 200GB NVMe Storage; Unmetered Bandwidth; ~ 300K Visitors a month; 99.99% Uptime Guarantee; Live Chat and Phone Support from Helpful Humans
+Power,24,5.99,17.99,67,143.76,False,10 Websites; 200GB NVMe Storage; Unmetered Bandwidth; ~ 300K Visitors a month; 99.99% Uptime Guarantee; Live Chat and Phone Support from Helpful Humans
+Power,12,5.79,18.99,70,69.48,True,10 Websites; 200GB NVMe Storage; Unmetered Bandwidth; ~ 300K Visitors a month; 99.99% Uptime Guarantee; Live Chat and Phone Support from Helpful Humans
+Power,1,17.99,20.99,14,17.99,False,10 Websites; 200GB NVMe Storage; Unmetered Bandwidth; ~ 300K Visitors a month; 99.99% Uptime Guarantee; Live Chat and Phone Support from Helpful Humans
+Pro,36,10.99,24.99,56,395.64,False,40 Websites; 2 vCPU Cores; 4GB RAM; 300GB NVMe Storage; Unmetered Bandwidth; ~ 500K Visitors a month; Included Agency Features; Dedicated IP; 99.99% Uptime Guarantee; Live Chat and Phone Support from Helpful Humans
+Pro,24,10.99,24.99,56,263.76,False,40 Websites; 2 vCPU Cores; 4GB RAM; 300GB NVMe Storage; Unmetered Bandwidth; ~ 500K Visitors a month; Included Agency Features; Dedicated IP; 99.99% Uptime Guarantee; Live Chat and Phone Support from Helpful Humans
+Pro,12,10.59,25.99,59,127.08,True,40 Websites; 2 vCPU Cores; 4GB RAM; 300GB NVMe Storage; Unmetered Bandwidth; ~ 500K Visitors a month; Included Agency Features; Dedicated IP; 99.99% Uptime Guarantee; Live Chat and Phone Support from Helpful Humans
+Pro,1,26.99,27.99,4,26.99,False,40 Websites; 2 vCPU Cores; 4GB RAM; 300GB NVMe Storage; Unmetered Bandwidth; ~ 500K Visitors a month; Included Agency Features; Dedicated IP; 99.99% Uptime Guarantee; Live Chat and Phone Support from Helpful Humans
