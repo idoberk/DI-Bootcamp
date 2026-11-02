@@ -2,6 +2,21 @@
 
 This is the running, human-readable log kept by the Student Progress Coach. Each daily review is prepended as a new entry at the top, so the most recent entry is always first. See `CLAUDE.md` for the full coaching contract and entry format.
 
+## 2026-11-02
+
+**Since yesterday:** 1 commit, 4 files — Selenium navigation, dynamic pages, data cleaning, missing-value codes, dtypes, one-hot encoding, log + standard scaling, EDA charts
+
+**What I saw:** On 2026-11-01 you added the Week 9 Day 4 mini projects. The data cleaning notebook (`DailyChallenge/mini_project_data_cleaning_transformation.ipynb`) is your most careful cleaning work so far. `count_unknown_codes` finds the GTD's -9 / -99 "unknown" codes that `isna()` misses (`INT_IDEO` goes from 0% to 51% missing). You leave `latitude` out of the replacement because its single -9 is a real coordinate, and you set the one impossible longitude (-86,185,896 in Nicaragua) to NaN rather than guess it. You also catch two `\xa0` trailing spaces before converting to `category`, use `Int64` / `boolean` so NaN survives, cut memory from 119.0 to 37.7 MB, and apply `log1p` before `StandardScaler` with the skew numbers to justify it. The XP scraper (`ExerciseXP/mini_project_scrape_dynamic_webpage.ipynb`) clicks through the footer link and waits for `div.imh-rostrum-card` rather than calling `requests`. It reads the term from the button's `data-term` attribute, so the CSV has every billing term, not just the visible 12-month price. You also added `/Week9/Day4/DailyChallenge/*.csv` to `.gitignore`, as the challenge asked. Both notebooks stop before a findings or report section, though. The only uncommitted change in the main checkout is cell-ID metadata in the daily challenge notebook (no content change), and `Week4/Day5/` is still untracked. Neither counts as reviewed work.
+
+**Recommendations:**
+
+- The XP prints "Found 4 plan cards", but `inmotion_shared_hosting_plans.csv` holds only Launch, Power and Pro (12 rows = 3 plans × 4 terms). So `parse_card` returned nothing for one card. Print `plan_name` and `len(card.select("div.imh-switcher"))` for each card to see which one it is. Then either parse it or explain in a markdown cell why it was skipped.
+- The daily challenge asks for "a detailed report documenting the steps" and for EDA "in their socio-economic context", but the notebook ends at 3.5. Add a `## 4. Report` that lists the cleaning decisions (codes → NaN, the longitude fix, the median fill by attack type, the 22 kept columns) and your key numbers (1993 gap, 49% bombings, 45.6% unknown groups, 49.2% of known-group deaths from ten groups). Say plainly that no second source was merged, so the "integrated dataset" part isn't covered. Or join a country-level table such as GDP per capita on `country_txt` and `iyear`.
+- Add a short findings cell to the XP too. The CSV already shows something worth writing about: the month-to-month price is 2.5–3.4× the 36-month price ($16.99 vs $4.99 for Launch, $26.99 vs $10.99 for Pro). Also, the 12-month term (`default_term = True`) has the cheapest monthly price but renews higher than the 24- and 36-month terms ($14.99 vs $13.99 for Launch).
+- Rerun both notebooks from top to bottom before you submit. In the XP the imports cell is `25`, the HTML cell `13` and `parse_plans` have no count, and `parse_card` is `31`. In the daily challenge, the yearly chart cell is `57` between `45` and `47`. Also fix the typo in 3.1: "would otherwise be bridges by a straight line" → "bridged".
+
+**Streak:** 1 day (2026-11-01; none on 2026-10-30 or 2026-10-31, none yet today)
+
 ## 2026-11-01
 
 **Catch-up review:** the last review ran on 2026-10-29, so this one is three days late and did not run on schedule.
