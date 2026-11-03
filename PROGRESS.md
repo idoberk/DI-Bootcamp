@@ -2,6 +2,19 @@
 
 This is the running, human-readable log kept by the Student Progress Coach. Each daily review is prepended as a new entry at the top, so the most recent entry is always first. See `CLAUDE.md` for the full coaching contract and entry format.
 
+## 2026-11-03
+
+**Since yesterday:** 0 commits, 0 files — no new exercise work
+
+**What I saw:** You haven't committed anything since the last review. The only commit after `f751382` is the coach's own `93a7437`. In the main checkout, the only change to `mini_project_data_cleaning_transformation.ipynb` is still the 22 changed lines of cell-ID metadata (`"ref"` fields), with no code or markdown changes, and `Week4/Day5/` is still untracked. Neither counts as reviewed work, so the open items from the Week 9 Day 4 mini projects are unchanged.
+
+**Recommendations:**
+
+- Start with the smallest open item in `ExerciseXP/mini_project_scrape_dynamic_webpage.ipynb`. It prints "Found 4 plan cards", but the CSV has only 3 plans. Print `plan_name` and `len(card.select("div.imh-switcher"))` for each card to find the one `parse_card` skipped.
+- Then add the missing `## 4. Report` to the daily challenge. It should list the cleaning decisions (codes → NaN, the longitude fix, the median fill by attack type) and the key numbers from your 3.x charts. Say plainly that no second source was merged.
+
+**Streak:** 0 days — paused (last commits dated 2026-11-01)
+
 ## 2026-11-02
 
 **Since yesterday:** 1 commit, 4 files — Selenium navigation, dynamic pages, data cleaning, missing-value codes, dtypes, one-hot encoding, log + standard scaling, EDA charts
