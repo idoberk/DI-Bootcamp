@@ -2,6 +2,19 @@
 
 This is the running, human-readable log kept by the Student Progress Coach. Each daily review is prepended as a new entry at the top, so the most recent entry is always first. See `CLAUDE.md` for the full coaching contract and entry format.
 
+## 2026-11-04
+
+**Since yesterday:** 0 commits, 0 files — no new exercise work
+
+**What I saw:** Still no new commits. The only commit since the last review is the coach's own `684ec5a`, so this is the second review in a row with nothing new to count. The main checkout does have one new uncommitted change: in `mini_project_data_cleaning_transformation.ipynb`, the yearly chart cell (`fig, axes = plt.subplots(2, 1, ...)`) went from `execution_count` 57 to 46. The counts now run 45 → 46 → 47, which fixes the out-of-order cell from the 2026-11-02 review. That is in progress, not reviewed work. The rest of the diff is still 21 lines of `"ref"` metadata. There is still no `## 4. Report`, the "bridges by a straight line" typo in 3.1 is still there, and `Week4/Day5/` is still untracked.
+
+**Recommendations:**
+
+- You've already rerun the yearly chart cell, so fix "bridges" → "bridged" in 3.1 while the notebook is open and commit both changes. Even a small commit restarts the streak.
+- Then write the `## 4. Report`. You have all the numbers already: the 1993 gap, 49% bombings, 45.6% unknown groups, and 49.2% of known-group deaths from ten groups. List the cleaning decisions (codes → NaN, the longitude fix, the median fill by attack type) and say plainly that no second source was merged.
+
+**Streak:** 0 days — paused (last commits dated 2026-11-01)
+
 ## 2026-11-03
 
 **Since yesterday:** 0 commits, 0 files — no new exercise work
