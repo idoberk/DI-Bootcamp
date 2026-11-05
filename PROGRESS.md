@@ -2,6 +2,19 @@
 
 This is the running, human-readable log kept by the Student Progress Coach. Each daily review is prepended as a new entry at the top, so the most recent entry is always first. See `CLAUDE.md` for the full coaching contract and entry format.
 
+## 2026-11-05
+
+**Since yesterday:** 0 commits, 0 files — no new exercise work
+
+**What I saw:** No new commits again. The only commit since the last review is the coach's own `ca0c0e7`, so this is the third review in a row with nothing to count, and your last exercise commit is still `f751382` from 2026-11-01. I need to correct yesterday's entry: the `execution_count` change (57 → 46) in `mini_project_data_cleaning_transformation.ipynb` wasn't new. The file was last saved on 2026-11-01 at 16:31, minutes after that commit, and it's the same 22-line uncommitted diff as before (21 `"ref"` lines plus that one count), so it's still in progress and hasn't been touched for four days. I also opened the untracked `Week4/Day5/ExerciseXP/exercise_xp.ipynb`, which earlier reviews only named: Exercises 4 and 5 still have the `> To-Do:` placeholder where your answers go, and code cells 5, 9 and 10 have no output.
+
+**Recommendations:**
+
+- Fix "bridges" → "bridged" in 3.1 of the daily challenge and commit it with the `execution_count` change. It's a two-minute job and it restarts the streak. After that, `## 4. Report` is the next open Week 9 item.
+- Finish the two `> To-Do:` answers in `Week4/Day5/ExerciseXP/exercise_xp.ipynb`, last saved on 2026-09-06. Neither needs new code: Exercise 4 asks for one sentence each on input, output and learning signal per scenario, and Exercise 5 asks for three paragraphs (supervised, unsupervised, reinforcement). Run cells 5, 9 and 10, then commit the folder so it stops showing as untracked.
+
+**Streak:** 0 days — paused (last commits dated 2026-11-01)
+
 ## 2026-11-04
 
 **Since yesterday:** 0 commits, 0 files — no new exercise work
