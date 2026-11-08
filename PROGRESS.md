@@ -2,6 +2,19 @@
 
 This is the running, human-readable log kept by the Student Progress Coach. Each daily review is prepended as a new entry at the top, so the most recent entry is always first. See `CLAUDE.md` for the full coaching contract and entry format.
 
+## 2026-11-08
+
+**Since yesterday:** 0 commits, 0 files — no new exercise work
+
+**What I saw:** This is a late catch-up review. The last one ran on 2026-11-05, so the runs for 2026-11-06 and 2026-11-07 didn't happen, and this entry covers all three days. The only commit since then is the coach's own `eb11e1d`. Your last exercise commit is still `f751382` from 2026-11-01, a week ago now. Nothing in the main checkout has changed either. `mini_project_data_cleaning_transformation.ipynb` was last saved on 2026-11-01 at 16:31, and its uncommitted diff is the same 22 lines as before: 21 `"ref"` lines plus `execution_count` 57 → 46. That's still in progress. The "bridges by a straight line" typo in 3.1 is still there, and there's no `## 4. Report` yet. `Week4/Day5/ExerciseXP/exercise_xp.ipynb` is still untracked and hasn't been saved since 2026-09-06.
+
+**Recommendations:**
+
+- A week after `f751382`, the main thing is to make any commit at all. Fix "bridged" in 3.1 and commit it together with the 22-line diff that's waiting. Even that small commit restarts the streak and clears the working tree before new Week 9 or 10 work piles on top of it.
+- If you don't plan to finish `Week4/Day5/ExerciseXP/` soon, decide what to do with it so it stops showing up in every review. Either commit it as-is with a note that Exercises 4 and 5 are `> To-Do:`, or write those two answers (no code needed) and then commit.
+
+**Streak:** 0 days — paused (last commits dated 2026-11-01)
+
 ## 2026-11-05
 
 **Since yesterday:** 0 commits, 0 files — no new exercise work
