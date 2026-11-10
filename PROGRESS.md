@@ -2,6 +2,20 @@
 
 This is the running, human-readable log kept by the Student Progress Coach. Each daily review is prepended as a new entry at the top, so the most recent entry is always first. See `CLAUDE.md` for the full coaching contract and entry format.
 
+## 2026-11-10
+
+**Since yesterday:** 0 commits, 0 files — no new exercise work (Week 11 Tableau work in progress)
+
+**What I saw:** This run is on schedule. The only commit since the last review is the coach's own `3c414ee`, and your last exercise commit is still `f751382` from 2026-11-01. There is new work, though, and it's the first in nine days. You created a `week11/day1` branch yesterday at 12:02, and `Week11/Day1/ExerciseXP/exercise_xp.twb` was saved at 12:26. It's still untracked, so I'm counting it as in progress, not reviewed. The workbook has six sheets, `Exercise 1`–`Exercise 6`, built on `vgsales.csv` with one calculated field per task. Several of those fields use table calculations correctly: `RANK(SUM([Global_Sales]), 'desc')` is placed next to `MIN([Rank])` on `Exercise 3` so you can check it against the dataset's own rank, `LOOKUP(SUM([Global_Sales]), -1)` drives `YoY Growth Rate` on `Exercise 4`, and `TOTAL(...)` drives `Genre Dominance Ratio` on `Exercise 5`. One field is off. `Profitability Index`, `(SUM([Global_Sales]) - SUM([Global_Sales] * 0.30)) / SUM([Global_Sales])`, simplifies to a constant 0.70 for every row, and none of the six sheets uses it. The Week 9 diff (`execution_count` 57 → 46 plus 21 `"ref"` lines) and the untracked `Week4/Day5/` are unchanged.
+
+**Recommendations:**
+
+- Commit `Week11/Day1/ExerciseXP/` on `week11/day1` now, while the work is fresh. A Tableau `.twb` can't be recovered from autosave the way a notebook can, and this commit restarts the streak. Before you do, check whether `vgsales.csv` (1.3 MB) belongs in the repo, the way the earlier datasets were handled.
+- Fix `Profitability Index` before you submit. As written it always returns 0.70, because the 30% cost cancels out. If the exercise wants profit relative to something, divide `Estimated Profit` by a different base, such as a platform's or genre's total. Otherwise drop the field and use `Estimated Profit` (already on `Exercise 2`) as the answer.
+- On `Exercise 4`, the `Year` filter only removes nulls (`included-values='non-null'`), so the sparse tail of `vgsales.csv` is still on the chart. Global sales go 70.93 (2016) → 0.05 (2017) → 0.29 (2020), and since 2018–2019 are missing, `LOOKUP(..., -1)` compares 2020 with 2017 and shows about +480%. Limit the range to 1980–2016, or add a caption saying the data stops being complete after 2016, so the chart doesn't read as a boom.
+
+**Streak:** 0 days — paused (last commits dated 2026-11-01)
+
 ## 2026-11-09
 
 **Since yesterday:** 0 commits, 0 files — no new exercise work
